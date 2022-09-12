@@ -1,10 +1,11 @@
 package br.com.ia.trab1;
 
+import br.com.ia.trab1.labirinto.Labirinto;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        var labirinto = new Labirinto(ReadFile.ReadFile("labirinto1.txt"));
-    }
+
+  public static void main(String[] args) throws IOException {
+    var labirinto = new Labirinto(Labirinto.ReadFile("labirinto1.txt"));
+  }
 }
