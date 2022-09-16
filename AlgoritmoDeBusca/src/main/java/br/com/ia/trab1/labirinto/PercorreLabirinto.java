@@ -7,7 +7,6 @@ import java.util.Random;
 
 public class PercorreLabirinto {
 
-
   public static List<Posicao> getComida(Labirinto labirinto) {
     List<Posicao> caminhoEncontrado = new LinkedList<>();
     Posicao posicaoAtual = labirinto.getInicio();
@@ -31,10 +30,10 @@ public class PercorreLabirinto {
       posicaoAtual = possiveisPosicoes.get(random.nextInt(possiveisPosicoes.size()));
       caminhoEncontrado.add(posicaoAtual);
       if (posicaoAtual.getTipo().equals(TipoConteudo.TESOURO)) {
-        System.out.println("achei um tesouro: " + posicaoAtual.toString());
+        //System.out.println("achei um tesouro: " + posicaoAtual.toString());
         Posicao finalPosicaoAtual = posicaoAtual;
-        if (!comidasAchadas.stream().anyMatch(p -> p.equals(finalPosicaoAtual))) {
-          System.out.println("  comida nova encontrada!");
+        if (comidasAchadas.stream().noneMatch(p -> p.equals(finalPosicaoAtual))) {
+          //System.out.println("  comida nova encontrada!");
           comidasAchadas.add(posicaoAtual);
         }
       }

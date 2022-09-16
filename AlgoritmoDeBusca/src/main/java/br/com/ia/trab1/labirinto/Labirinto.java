@@ -54,16 +54,16 @@ public class Labirinto {
         }
         this.matriz.get(i - 1).add(posicao);
       }
-      this.matriz
-          .get(i - 1)
-          .forEach(p -> System.out.print(p.getTipo().toString().substring(0, 1) + "  "));
-      System.out.println(" ");
+//      this.matriz
+//          .get(i - 1)
+//          .forEach(p -> System.out.print(p.getTipo().toString().substring(0, 1) + "  "));
+//      System.out.println(" ");
     }
 
   }
 
   public List<Posicao> possiveisCaminhos(Posicao posicao) {
-    System.out.println(" -> possiveis caminhos");
+    //System.out.println(" -> possiveis caminhos");
     var posicoesPossiveis = new ArrayList<Posicao>();
 
     int x_inicial = 0;
@@ -86,23 +86,24 @@ public class Labirinto {
     if (posicao.getY() < this.matriz.get(0).size() - 1) {
       y_final = posicao.getY() + 1;
     }
-    System.out.print("[ x_inicial= " + x_inicial + ", x_final= " + x_final);
-    System.out.print(", y_inicial= " + y_inicial + ", y_final= " + y_final + "]");
+//    System.out.print("[ x_inicial= " + x_inicial + ", x_final= " + x_final);
+//    System.out.print(", y_inicial= " + y_inicial + ", y_final= " + y_final + "]");
 
-    System.out.println("    - loop");
+    //System.out.println("    - loop");
     for (int i = x_inicial; i <= x_final; i++) {
-      System.out.println("      - i = " + i);
+      //System.out.println("      - i = " + i);
       for (int j = y_inicial; j <= y_final; j++) {
         if (!posicao.equals(i, j)) {
-          System.out.println("        - j = " + j);
+          //System.out.println("        - j = " + j);
           var posicaoMatriz = this.matriz.get(i).get(j);
           if (!posicaoMatriz.getTipo().equals(TipoConteudo.PAREDE)) {
             posicoesPossiveis.add(posicaoMatriz);
-            System.out.println(
-                "        - possivel caminho encontrado, tipo = " + posicaoMatriz.getTipo());
-          } else {
-            System.out.println("        - parede");
+//            System.out.println(
+//                "        - possivel caminho encontrado, tipo = " + posicaoMatriz.getTipo());
           }
+//          else {
+//            System.out.println("        - parede");
+//          }
         }
       }
     }
