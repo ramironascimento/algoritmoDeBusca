@@ -10,9 +10,11 @@ import java.util.List;
 public class Labirinto {
 
   private List<List<Posicao>> matriz;
+  private List<Posicao> comidas;
 
   public Labirinto(String file) {
     this.matriz = new ArrayList<>();
+    this.comidas = new ArrayList<>();
     preencherMatriz(file);
   }
 
@@ -46,11 +48,16 @@ public class Labirinto {
           default:
             throw new IllegalReceiveException("valor da posicao da matriz invalido.");
         }
-        this.matriz.get(i - 1).add(new Posicao(i - 1, j, tipo));
+        var posicao = new Posicao(i - 1, j, tipo);
+        if (tipo.equals(TipoConteudo.TESOURO)) {
+          this.comidas.add(posicao);
+        }
+        this.matriz.get(i - 1).add(posicao);
       }
       this.matriz
           .get(i - 1)
-          .forEach(p -> System.out.print(p.getTipo().toString().substring(0,1) + "  "));
+          .forEach(p -> System.out.print(p.getTipo().toString().substring(0, 1) + "  "));
+      System.out.println(" ");
     }
 
   }
@@ -61,8 +68,8 @@ public class Labirinto {
 
     int x_inicial = 0;
     int y_inicial = 0;
-    int x_final = 0;
-    int y_final = 0;
+    int x_final = this.matriz.size() - 1;
+    int y_final = this.matriz.get(0).size() - 1;
 
     if (posicao.getX() >= 1) {
       x_inicial = posicao.getX() - 1;
@@ -72,23 +79,21 @@ public class Labirinto {
       y_inicial = posicao.getY() - 1;
     }
 
-    if (posicao.getX() <= this.matriz.size() - 1) {
+    if (posicao.getX() < this.matriz.size() - 1) {
       x_final = posicao.getX() + 1;
     }
 
-    if (posicao.getY() <= this.matriz.get(0).size() - 1) {
+    if (posicao.getY() < this.matriz.get(0).size() - 1) {
       y_final = posicao.getY() + 1;
     }
-    System.out.println("  - x inicial: " + x_inicial);
-    System.out.println("  - x final: " + x_final);
-    System.out.println("  - y inicial: " + y_inicial);
-    System.out.println("  - y final: " + y_final);
+    System.out.print("[ x_inicial= " + x_inicial + ", x_final= " + x_final);
+    System.out.print(", y_inicial= " + y_inicial + ", y_final= " + y_final + "]");
 
     System.out.println("    - loop");
     for (int i = x_inicial; i <= x_final; i++) {
       System.out.println("      - i = " + i);
       for (int j = y_inicial; j <= y_final; j++) {
-        if(!posicao.equals(i,j)) {
+        if (!posicao.equals(i, j)) {
           System.out.println("        - j = " + j);
           var posicaoMatriz = this.matriz.get(i).get(j);
           if (!posicaoMatriz.getTipo().equals(TipoConteudo.PAREDE)) {
