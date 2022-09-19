@@ -1,6 +1,6 @@
-package br.com.ia.trab1.agente;
+package br.com.ia.trab1;
 
-import br.com.ia.trab1.labirinto.Posicao;
+import br.com.ia.trab1.Posicao;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

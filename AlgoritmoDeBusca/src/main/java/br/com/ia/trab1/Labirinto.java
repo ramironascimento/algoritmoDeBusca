@@ -1,4 +1,4 @@
-package br.com.ia.trab1.labirinto;
+package br.com.ia.trab1;
 
 import com.sun.nio.sctp.IllegalReceiveException;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package br.com.ia.trab1.labirinto;
+package br.com.ia.trab1;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

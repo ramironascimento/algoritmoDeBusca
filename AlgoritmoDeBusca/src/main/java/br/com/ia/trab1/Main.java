@@ -1,9 +1,7 @@
 package br.com.ia.trab1;
 
-import br.com.ia.trab1.algoritmo.AlgoritmoGenetico;
-import br.com.ia.trab1.labirinto.Labirinto;
-import br.com.ia.trab1.labirinto.PercorreLabirinto;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,20 +10,11 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
     // le o arquivo
-    //var labirinto = new Labirinto(Labirinto.ReadFile("labirinto1.txt"));
-    var labirintos = List.of(new Labirinto(Labirinto.ReadFile("labirinto1.txt")),
-        new Labirinto(Labirinto.ReadFile("labirinto1.txt")),
-        new Labirinto(Labirinto.ReadFile("labirinto1.txt")),
-        new Labirinto(Labirinto.ReadFile("labirinto1.txt")),
-        new Labirinto(Labirinto.ReadFile("labirinto1.txt")),
-        new Labirinto(Labirinto.ReadFile("labirinto1.txt")),
-        new Labirinto(Labirinto.ReadFile("labirinto1.txt")),
-        new Labirinto(Labirinto.ReadFile("labirinto1.txt")),
-        new Labirinto(Labirinto.ReadFile("labirinto1.txt")),
-        new Labirinto(Labirinto.ReadFile("labirinto1.txt")));
+    var labirinto = new Labirinto(Labirinto.ReadFile("labirinto1.txt"));
 
-    AlgoritmoGenetico<Labirinto> algoritmo = new AlgoritmoGenetico<>(10, labirintos);
+    AlgoritmoGenetico algoritmo = new AlgoritmoGenetico(200,10);
 
+    /*
     var resultadosPrimeiraSelecao = algoritmo.getListaCromossomos()
         .parallelStream()
         .map((l) -> {
@@ -40,6 +29,7 @@ public class Main {
         .min(Comparator.comparing(List::size));
 
     System.out.println(min.get().size());
+    */
   }
 
 }
