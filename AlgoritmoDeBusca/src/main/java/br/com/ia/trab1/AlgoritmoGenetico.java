@@ -6,6 +6,8 @@ import static br.com.ia.trab1.Output.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import br.com.ia.trab1.main.Direcoes;
 import lombok.Getter;
 import lombok.Setter;
 

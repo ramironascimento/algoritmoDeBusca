@@ -1,4 +1,8 @@
-package br.com.ia.trab1;
+package br.com.ia.trab1.main;
+
+import br.com.ia.trab1.Posicao;
+import br.com.ia.trab1.TipoConteudo;
+import br.com.ia.trab1.main.Labirinto;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

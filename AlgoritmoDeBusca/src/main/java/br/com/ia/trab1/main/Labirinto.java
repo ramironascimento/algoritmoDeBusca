@@ -1,5 +1,7 @@
-package br.com.ia.trab1;
+package br.com.ia.trab1.main;
 
+import br.com.ia.trab1.Posicao;
+import br.com.ia.trab1.TipoConteudo;
 import com.sun.nio.sctp.IllegalReceiveException;
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,4 +1,4 @@
-package br.com.ia.trab1;
+package br.com.ia.trab1.main;
 
 public enum Direcoes {
   LESTE("→"), OESTE("←"),
@@ -16,3 +16,4 @@ public enum Direcoes {
     return flecha;
   }
 }
+
