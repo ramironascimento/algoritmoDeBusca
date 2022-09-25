@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class Mutacao {
 
+
+    ////////////////////
+    /* ACHO QUE PODEMOS INCLUIR MUTACOES NA CLASSE DE ALGORITMO GENETICO PARA CONCENTRAR AS ACOES */
+    ///////////////////
     private void mutacao(Populacao populacao) {
 
         Random rnd = new Random();

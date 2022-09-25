@@ -13,6 +13,8 @@ public class PercorreLabirinto {
 
 
   ///////////////////////////Percorrer labirinto pode ser integrado na aptidao
+
+  ////////////////////////// podemos utilizar para marcar o caminho percorrido na matriz, ex 0,1,5,8,9
   public static List<Posicao> getComida(Labirinto labirinto) {
     List<Posicao> caminhoEncontrado = new LinkedList<>();
     Posicao posicaoAtual = labirinto.getInicio();

@@ -57,10 +57,17 @@ public class AlgoritmoGenetico {
 
   public Individuos MutacaoParcial(Individuos individuo){ //aproveitara parte do caminho com sucesso
       int indexUltimaPosValida = individuo.getIndexUltimaPosValida();
-      Direcoes caminhoOverride = individuo.getCaminhoIndividuo(); //aproveitamos a parte intera e sobreescrevemos o resto com movimentos aleatorios
+      Direcoes[] caminhoOverride = individuo.getCaminhoIndividuo(); //aproveitamos a parte intera e sobreescrevemos o resto com movimentos aleatorios
       for(int i  = indexUltimaPosValida+1; i<caminhoTotalPorIndividuo; i++){
         caminhoOverride[i] = Direcoes.generateRandomDirecao();
       }
+      
+      Individuos individuoMutado = new Individuos(caminhoTotalPorIndividuo);
+      individuoMutado.setCaminhoIndividuo(caminhoOverride);
+      
+      // individuoMutado.setAptidao(); PRECISAMOS DEFINIR A FUNCAO APTIDAO AINDA
+
+      return individuoMutado;
 
   }
 }

@@ -55,8 +55,8 @@ public class Main {
         int tamPopulacao = 10;
         int caminhoTotalPorIndividuo = 20;
         int quantidadeDeGeracoes=100000;
-        int taxaDeMutacaoParcial; // aquela que aroveita o caminho bom
-        int taxaDeMutacaoTotal; // gera um individuo totalmente novo
+        double taxaDeMutacaoParcial=0.0; // aquela que aroveita o caminho bom
+        double taxaDeMutacaoTotal=0.01; // gera um individuo totalmente novo
         int qntComidas = labirinto.getQntComida();
 
         AlgoritmoGenetico algGen = new AlgoritmoGenetico(tamPopulacao, 
