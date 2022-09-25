@@ -11,13 +11,16 @@ import java.util.List;
 
 public class Labirinto {
 
-  private List<List<Posicao>> matriz;
-  private List<Posicao> comidas;
+  public List<List<Posicao>> matriz;
+  //private List<Posicao> comidas;
+  private int comidas;
 
-  public Labirinto(String file) {
+  public Labirinto(String file) throws IOException {
     this.matriz = new ArrayList<>();
-    this.comidas = new ArrayList<>();
-    preencherMatriz(file);
+    //this.comidas = new ArrayList<>();
+    this.comidas = 0;
+    String allLinesFiles = ReadFile(file);
+    preencherMatriz(allLinesFiles);
   }
 
   public static String ReadFile(String file) throws IOException {
@@ -52,7 +55,7 @@ public class Labirinto {
         }
         var posicao = new Posicao(i - 1, j, tipo);
         if (tipo.equals(TipoConteudo.TESOURO)) {
-          this.comidas.add(posicao);
+          this.comidas++;
         }
         this.matriz.get(i - 1).add(posicao);
       }
@@ -64,6 +67,15 @@ public class Labirinto {
 
   }
 
+  public int getQntComida(){
+    return this.comidas;
+  }
+
+  /**
+   * @deprecated //nao podemos verificar possiveis caminhos. O algortimo nao pode prever caminhos com if else
+   * @param posicao
+   * @return
+   */
   public List<Posicao> possiveisCaminhos(Posicao posicao) {
     //System.out.println(" -> possiveis caminhos");
     var posicoesPossiveis = new ArrayList<Posicao>();

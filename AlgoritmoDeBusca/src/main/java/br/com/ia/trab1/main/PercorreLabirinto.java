@@ -11,6 +11,8 @@ import java.util.Random;
 
 public class PercorreLabirinto {
 
+
+  ///////////////////////////Percorrer labirinto pode ser integrado na aptidao
   public static List<Posicao> getComida(Labirinto labirinto) {
     List<Posicao> caminhoEncontrado = new LinkedList<>();
     Posicao posicaoAtual = labirinto.getInicio();

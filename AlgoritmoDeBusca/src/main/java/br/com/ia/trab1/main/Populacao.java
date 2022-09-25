@@ -7,18 +7,19 @@ public class Populacao { // agrupar os individuos
     Random rnd = new Random();
     private int tamPopulacao;
     private Individuos[] individuos;
+    private int indexMelhorIndviduo;
 
     public Populacao(int tamPopulacao) {
         this.tamPopulacao = tamPopulacao;
-        this.individuos = iniciaIndividuos();
+        this.individuos = new Individuos[tamPopulacao];
 
     }
 
-    private Individuos[] iniciaIndividuos() {
-        Individuos[] individuos = new Individuos[tamPopulacao];
-        String aux = String.valueOf(rnd.nextInt(99));
+    public Individuos[] iniciaPopulacao(int caminhoTotalPorIndividuo) {
+        this.individuos = new Individuos[tamPopulacao];
+        //String aux = String.valueOf(rnd.nextInt(99));
         for (int i=0; i<individuos.length; i++) {
-            individuos[i] = new Individuos(Integer.parseInt(aux));
+            individuos[i] = new Individuos(caminhoTotalPorIndividuo, true);
 
         }
         return individuos;
