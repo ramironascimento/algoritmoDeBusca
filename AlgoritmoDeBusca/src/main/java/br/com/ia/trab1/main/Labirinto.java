@@ -29,8 +29,8 @@ public class Labirinto {
     return data;
   }
 
-  public void preencherMatriz(String file) {
-    var fileLines = file.replace("\r", "").split("\n");
+  public void preencherMatriz(String allLinesFiles) {
+    var fileLines = allLinesFiles.replace("\r", "").split("\n");
     var xy = Integer.parseInt(fileLines[0]);
     for (int i = 1; i <= xy; i++) {
       this.matriz.add(new ArrayList<>());
@@ -127,4 +127,6 @@ public class Labirinto {
   public Posicao getInicio() {
     return this.matriz.get(0).get(0);
   }
+
+
 }

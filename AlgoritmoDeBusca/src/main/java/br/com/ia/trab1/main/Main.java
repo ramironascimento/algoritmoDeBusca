@@ -61,8 +61,9 @@ public class Main {
 
         AlgoritmoGenetico algGen = new AlgoritmoGenetico(tamPopulacao, 
         caminhoTotalPorIndividuo, quantidadeDeGeracoes, taxaDeMutacaoParcial, taxaDeMutacaoTotal, qntComidas);
+        algGen.executaAlgoritmoGenetico();
 
-        Populacao popInical = new Populacao(tamPopulacao);
+        /*Populacao popInical = new Populacao(tamPopulacao);
         popInical.iniciaPopulacao(caminhoTotalPorIndividuo);
 
         for (Individuos i : popInical.getIndividuos()) {
@@ -71,7 +72,7 @@ public class Main {
             }
             System.out.println("");
             System.out.println("=");
-        }
+        }*/
 
         // AlgoritmoGenetico algoritmo = new AlgoritmoGenetico(200,10);
 

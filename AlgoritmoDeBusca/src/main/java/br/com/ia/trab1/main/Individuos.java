@@ -13,6 +13,13 @@ public class Individuos {
             this.indexUltimaPosValida = -1;
             this.aptidao = 0;
     }
+
+    /**
+     * 
+     * @param caminhoTotalPorIndividuo
+     * @param novosCaminhosAleatorios utilizado para novos Individuos que precisam ser aleatorios:
+     * Ex populacaoInicial, os movimentos sao aleatorios
+     */
     public Individuos(int caminhoTotalPorIndividuo, boolean novosCaminhosAleatorios) { //gera autoamticamente um individuo com os caminhos
         this.caminhoIndividuo = new Direcoes[caminhoTotalPorIndividuo];
         this.indexUltimaPosValida = -1;

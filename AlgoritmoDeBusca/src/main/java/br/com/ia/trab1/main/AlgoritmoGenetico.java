@@ -33,6 +33,12 @@ public class AlgoritmoGenetico {
 
 
     public void executaAlgoritmoGenetico(){
+        Populacao popInical = new Populacao(tamPopulacao);
+        popInical.iniciaPopulacao(caminhoTotalPorIndividuo);
+
+        for (Individuos individuo : popInical.getIndividuos()) {
+            System.out.println(individuo.toString() + "||" + Aptidao(individuo));
+        }
 
     }
 
@@ -41,7 +47,18 @@ public class AlgoritmoGenetico {
 
   /************************************************** */
   public double Aptidao(Individuos individuos){
-      return 0.0;
+      Individuos IndividuoPercorrido = PercorreLabirinto.PercorrerLabirinto(individuos);
+      double aptidao=0.0;
+      //Modelo para adpitdao;
+      if(IndividuoPercorrido.getIndexUltimaPosValida() == 0) aptidao = -1; //punimos aquele que não consegue sair do lugar
+
+      //valorizamos aqueles que percorrer o menor caminho e em dobro as comidas coletadas
+      
+      aptidao = (IndividuoPercorrido.getCaminhoIndividuo().length - IndividuoPercorrido.getIndexUltimaPosValida()) * (2 * IndividuoPercorrido.getComidasColetadas()); 
+      
+      //**Pendente avaliar loop para punir
+
+      return aptidao;
   }
   public Individuos[] Crossover(Individuos father, Individuos Mother){
     

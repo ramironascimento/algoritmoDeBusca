@@ -15,14 +15,14 @@ public class Populacao { // agrupar os individuos
 
     }
 
-    public Individuos[] iniciaPopulacao(int caminhoTotalPorIndividuo) {
+    public void iniciaPopulacao(int caminhoTotalPorIndividuo) {
         this.individuos = new Individuos[tamPopulacao];
         //String aux = String.valueOf(rnd.nextInt(99));
         for (int i=0; i<individuos.length; i++) {
             individuos[i] = new Individuos(caminhoTotalPorIndividuo, true);
 
         }
-        return individuos;
+        
     }
 
 //    private void geraPopulacao(int tamanho) {

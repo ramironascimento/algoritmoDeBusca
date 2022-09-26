@@ -12,7 +12,16 @@ import java.util.Random;
 public class PercorreLabirinto {
 
 
-  ///////////////////////////Percorrer labirinto pode ser integrado na aptidao
+  
+
+  /**
+   * Recebe um individuo para percorrer.
+   * @return Individuo com suas infomacoes atualizadas
+   */
+  public static Individuos PercorrerLabirinto(Individuos individuoOriginal){
+      Individuos individuoAtualizado = individuoOriginal;
+      return individuoAtualizado;
+  }
 
   ////////////////////////// podemos utilizar para marcar o caminho percorrido na matriz, ex 0,1,5,8,9
   public static List<Posicao> getComida(Labirinto labirinto) {
