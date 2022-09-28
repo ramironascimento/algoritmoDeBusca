@@ -2,9 +2,11 @@ package br.com.ia.trab1;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
+@Setter
 public class Posicao {
 
   private int x;

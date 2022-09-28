@@ -15,6 +15,19 @@ public class Labirinto {
   //private List<Posicao> comidas;
   private int comidas;
 
+  //Singleton
+  private static Labirinto uniqueInstance;
+
+	private Labirinto() {
+	}
+
+	public static synchronized Labirinto getInstance() {
+		if (uniqueInstance == null) System.out.println("SEM LABIRINTO CARREGADO");
+			
+		return uniqueInstance;
+	}
+
+
   public Labirinto(String file) throws IOException {
     this.matriz = new ArrayList<>();
     //this.comidas = new ArrayList<>();
@@ -65,6 +78,9 @@ public class Labirinto {
 //      System.out.println(" ");
     }
 
+  }
+  public List<List<Posicao>> getMatrizLabirinto(){
+    return this.matriz;
   }
 
   public int getQntComida(){
