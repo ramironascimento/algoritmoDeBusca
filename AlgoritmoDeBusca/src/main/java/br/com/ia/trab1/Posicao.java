@@ -9,26 +9,26 @@ import lombok.Setter;
 @Setter
 public class Posicao {
 
-  private int x;
-  private int y;
+  private int linha;
+  private int coluna;
   private TipoConteudo tipo;
 
   public boolean equals(Posicao obj) {
-    if(this.x== obj.getX() && this.y== obj.getY()){
+    if(this.linha== obj.getLinha() && this.coluna== obj.getColuna()){
       return true;
     }
     return false;
   }
 
-  public boolean equals(int x, int y) {
-    return this.x == x && this.y == y;
+  public boolean equals(int linha, int coluna) {
+    return this.linha == linha && this.coluna == coluna;
   }
 
   @Override
   public String toString() {
     return "Posicao{" +
-        "x=" + x +
-        ", y=" + y +
+        "linha=" + linha +
+        ", coluna=" + coluna +
         ", tipo=" + tipo +
         '}';
   }

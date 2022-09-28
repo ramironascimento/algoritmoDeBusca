@@ -50,11 +50,13 @@ public class AlgoritmoGenetico {
       Individuos IndividuoPercorrido = PercorreLabirinto.PercorrerLabirinto(individuos);
       double aptidao=0.0;
       //Modelo para adpitdao;
-      if(IndividuoPercorrido.getIndexUltimaPosValida() == 0) aptidao = -1; //punimos aquele que não consegue sair do lugar
+      if(IndividuoPercorrido.getindexNPonto() == 0) aptidao = -1; //punimos aquele que não consegue sair do lugar
 
-      //valorizamos aqueles que percorrer o menor caminho e em dobro as comidas coletadas
       
-      aptidao = (IndividuoPercorrido.getCaminhoIndividuo().length - IndividuoPercorrido.getIndexUltimaPosValida()) * (2 * IndividuoPercorrido.getComidasColetadas()); 
+      //valorizamos aqueles que percorrer o menor caminho + em dobro as comidas coletadas #Pode ser ser bom, ou pode ser ruim pois privilegia somente queem anda pouco e nao faz nada#      
+      aptidao = (IndividuoPercorrido.getCaminhoIndividuo().length - IndividuoPercorrido.getindexNPonto()) * (2 * IndividuoPercorrido.getComidasColetadas()); 
+
+      //preisamos punir ao colidir em parede ou verificar se o index do ultimo movimento já ajuda
       
       //**Pendente avaliar loop para punir
 
@@ -73,7 +75,7 @@ public class AlgoritmoGenetico {
   }
 
   public Individuos MutacaoParcial(Individuos individuo){ //aproveitara parte do caminho com sucesso
-      int indexUltimaPosValida = individuo.getIndexUltimaPosValida();
+      int indexUltimaPosValida = individuo.getindexNPonto();
       Direcoes[] caminhoOverride = individuo.getCaminhoIndividuo(); //aproveitamos a parte intera e sobreescrevemos o resto com movimentos aleatorios
       for(int i  = indexUltimaPosValida+1; i<caminhoTotalPorIndividuo; i++){
         caminhoOverride[i] = Direcoes.generateRandomDirecao();

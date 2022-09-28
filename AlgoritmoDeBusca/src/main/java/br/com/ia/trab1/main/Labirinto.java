@@ -14,6 +14,7 @@ public class Labirinto {
   public List<List<Posicao>> matriz;
   //private List<Posicao> comidas;
   private int comidas;
+  private TipoConteudo inicio;
 
   //Singleton
   private static Labirinto uniqueInstance;
@@ -70,6 +71,9 @@ public class Labirinto {
         if (tipo.equals(TipoConteudo.TESOURO)) {
           this.comidas++;
         }
+        if (tipo.equals(TipoConteudo.INICIO)) {
+          this.inicio = tipo;
+        }
         this.matriz.get(i - 1).add(posicao);
       }
 //      this.matriz
@@ -101,20 +105,20 @@ public class Labirinto {
     int x_final = this.matriz.size() - 1;
     int y_final = this.matriz.get(0).size() - 1;
 
-    if (posicao.getX() >= 1) {
-      x_inicial = posicao.getX() - 1;
+    if (posicao.getLinha() >= 1) {
+      x_inicial = posicao.getLinha() - 1;
     }
 
-    if (posicao.getY() >= 1) {
-      y_inicial = posicao.getY() - 1;
+    if (posicao.getColuna() >= 1) {
+      y_inicial = posicao.getColuna() - 1;
     }
 
-    if (posicao.getX() < this.matriz.size() - 1) {
-      x_final = posicao.getX() + 1;
+    if (posicao.getLinha() < this.matriz.size() - 1) {
+      x_final = posicao.getLinha() + 1;
     }
 
-    if (posicao.getY() < this.matriz.get(0).size() - 1) {
-      y_final = posicao.getY() + 1;
+    if (posicao.getColuna() < this.matriz.get(0).size() - 1) {
+      y_final = posicao.getColuna() + 1;
     }
 //    System.out.print("[ x_inicial= " + x_inicial + ", x_final= " + x_final);
 //    System.out.print(", y_inicial= " + y_inicial + ", y_final= " + y_final + "]");

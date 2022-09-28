@@ -4,13 +4,13 @@ package br.com.ia.trab1.main;
 public class Individuos {
 
     private Direcoes[] caminhoIndividuo;
-    private int indexUltimaPosValida;
+    private int indexNPonto;
     private int comidasColetadas;
     private int aptidao; // definimos aptidao sendo quanto maior o valor, melhor o individuo
 
     public Individuos(int caminhoTotalPorIndividuo) {
             this.caminhoIndividuo = new Direcoes[caminhoTotalPorIndividuo];
-            this.indexUltimaPosValida = -1;
+            this.indexNPonto = -1;
             this.aptidao = 0;
     }
 
@@ -22,7 +22,7 @@ public class Individuos {
      */
     public Individuos(int caminhoTotalPorIndividuo, boolean novosCaminhosAleatorios) { //gera autoamticamente um individuo com os caminhos
         this.caminhoIndividuo = new Direcoes[caminhoTotalPorIndividuo];
-        this.indexUltimaPosValida = -1;
+        this.indexNPonto = -1;
         this.aptidao = 0; //aptidao em 0
 
         if(novosCaminhosAleatorios) iniciaCaminhosAleatorios();
@@ -49,9 +49,9 @@ public class Individuos {
         this.caminhoIndividuo = caminhoIndividuo;
     }
 
-    public void setIndexUltimaPosValida(int indexUltimaPosValida) {
-        if(indexUltimaPosValida != -1) {
-            this.indexUltimaPosValida = indexUltimaPosValida;
+    public void setindexNPonto(int indexNPonto) {
+        if(indexNPonto != -1) {
+            this.indexNPonto = indexNPonto;
         }
     }
 
@@ -63,8 +63,8 @@ public class Individuos {
         return aptidao;
     }
 
-    public int getIndexUltimaPosValida() {
-        return indexUltimaPosValida;
+    public int getindexNPonto() {
+        return indexNPonto;
     }
 
     public Direcoes[] getCaminhoIndividuo() {
@@ -75,7 +75,7 @@ public class Individuos {
     public String toString() {
         return "Individuos  " +
                 "caminhoIndividuo=\n" + caminhoIndividuo +
-                ", indexUltimaPosValida=\n" + indexUltimaPosValida +
+                ", indexNPonto=\n" + indexNPonto +
                 ", aptidao=" + aptidao +
                 ' ';
     }
