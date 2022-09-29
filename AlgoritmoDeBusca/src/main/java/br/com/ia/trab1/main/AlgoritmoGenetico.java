@@ -30,8 +30,10 @@ public class AlgoritmoGenetico {
     this.taxaDeMutacaoParcial = taxaDeMutacaoParcial;
     this.taxaDeMutacaoTotal = taxaDeMutacaoTotal;
     this.qntComida = qntComida;
+  }
 
   public void executaAlgoritmoGenetico() {
+    
     Populacao popInical = new Populacao(tamPopulacao);
     popInical.iniciaPopulacao(caminhoTotalPorIndividuo);
     int n_gerações = 1000;
@@ -41,13 +43,27 @@ public class AlgoritmoGenetico {
         individuo = PercorreLabirinto.PercorrerLabirinto(individuo);
         System.out.println(individuo.toString() + "||" + Aptidao(individuo));
       }
+
+      // elistismo*/
+   
     }
 
-    // elistismo*/
+    //serve para descobrir o melhoe
+     eletismo = getEletismo(popInical);
+
+     // =>>>Individuos[] PaiEMae = Seleção() // 
+     //o metodo seleção deve randomizar dois individuos 
+     //(popInicial.getIndividuos()[i.randmico])para o pai e randomizar dois para mae. 
+     //Pega o pai com melhor aptidao. Pega mae com maior aptidar 
+
+    
+
+
 
   }
 
   /************************************************** */
+
 
   public Individuos getElistismo(Populacao populacao) {
     int indexOfMaxValue = -1;
@@ -59,7 +75,13 @@ public class AlgoritmoGenetico {
       }
     }
     // se nenhum melhor, deolve o mesmo
-    return this.eletismo;
+    if(indexOfMaxValue == -1){
+      return this.eletismo;
+    }
+    else{
+      populacao.getIndividuos()[indexOfMaxValue]/
+    }  
+      
 
   }
 
@@ -84,6 +106,10 @@ public class AlgoritmoGenetico {
     return aptidao;
   }
 
+  public Individuos getEletismo(Populacao  populacao) {
+
+
+  }
   public Individuos[] Crossover(Individuos father, Individuos Mother) {
 
     /** FALTA CONSTRUIR */

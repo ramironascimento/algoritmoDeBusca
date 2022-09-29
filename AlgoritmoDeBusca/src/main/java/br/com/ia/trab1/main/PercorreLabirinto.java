@@ -22,10 +22,10 @@ public class PercorreLabirinto {
     List<List<Posicao>> matrizLaribinrto = labirinto.getMatrizLabirinto();
     Posicao posicaoAtual = labirinto.getInicio();
 
-    Direcoes[] movimento = individuo.getCaminhoIndividuo();
+    Direcoes[] movimento = individuo.getmovimentosDoIndividuo();
 
     // mais tarde podemos otimizar com i recebendo o ultimo i da
-    for (int i = 0; i < individuo.getCaminhoIndividuo().length; i++) {
+    for (int i = 0; i < individuo.getmovimentosDoIndividuo().length; i++) {
 
       // Faz o movimento.
       int linha = posicaoAtual.getLinha();
@@ -70,8 +70,7 @@ public class PercorreLabirinto {
           break;
 
         default:
-          System.out.println("Movimento do indivíduo inválido");
-          break;
+          System.exit(1);
       }
 
       // VALIDA OS MOVEVIMENTOS
