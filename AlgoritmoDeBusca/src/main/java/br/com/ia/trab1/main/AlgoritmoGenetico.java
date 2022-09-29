@@ -1,11 +1,5 @@
 package br.com.ia.trab1.main;
 
-import static br.com.ia.trab1.Output.*;
-
-import java.beans.IndexedPropertyChangeEvent;
-import java.util.*;
-
-
 public class AlgoritmoGenetico {
 
   // VARIAIVEIS GLOBAIS DE ALGORTIMOS GENETICOS (outras classes podem precisar)
@@ -16,7 +10,9 @@ public class AlgoritmoGenetico {
   public double taxaDeMutacaoTotal; // gera um individuo totalmente novo
   public int qntComida;
 
-  public Individuos eletismo; // individuo com a melhor aptidao a cada geração
+  public Individuos elitismo; // individuo com a melhor aptidao a cada geração
+
+  /************************************************** */
 
   public AlgoritmoGenetico(int tamPopulacao, int caminhoTotalPorIndividuo, int quantidadeDeGeracoes,
       double taxaDeMutacaoParcial, double taxaDeMutacaoTotal, int qntComida) {
@@ -26,7 +22,7 @@ public class AlgoritmoGenetico {
     this.taxaDeMutacaoParcial = taxaDeMutacaoParcial;
     this.taxaDeMutacaoTotal = taxaDeMutacaoTotal;
     this.qntComida = qntComida;
-    this.eletismo = getMinValue();
+    this.elitismo = getMinValue();
 
   }
 
@@ -37,12 +33,11 @@ public class AlgoritmoGenetico {
   }
 
   public void executaAlgoritmoGenetico() {
-    
+
     Populacao popInical = new Populacao(tamPopulacao);
     popInical.iniciaPopulacao(caminhoTotalPorIndividuo);
-    int n_gerações = 1000;
-    for (int i = 0; i < n_gerações; i++) {
-
+    int n_geracoes = 10;
+    for (int i = 0; i < n_geracoes; i++) {
       for (Individuos individuo : popInical.getIndividuos()) {
         individuo = PercorreLabirinto.PercorrerLabirinto(individuo);
         System.out.println(individuo.toString() + "||" + Aptidao(individuo));
@@ -52,14 +47,14 @@ public class AlgoritmoGenetico {
     }
 
     //serve para descobrir o melhoe
-     eletismo = getEletismo(popInical);
+    elitismo = getElitismo(popInical);
 
-     //SELECAO
-     // =>>>Individuos[] pai = Seleção() // 
-     // =>>>Individuos[] mae = Seleção() // 
-     //o metodo seleção deve randomizar dois individuos 
-     //(popInicial.getIndividuos()[i.randmico])para o pai e randomizar dois para mae. 
-     //Pega o pai com melhor aptidao. Pega mae com maior aptidar 
+    //SELECAO
+    // =>>>Individuos[] pai = Seleção() //
+    // =>>>Individuos[] mae = Seleção() //
+    //o metodo seleção deve randomizar dois individuos
+    //(popInicial.getIndividuos()[i.randmico])para o pai e randomizar dois para mae.
+    //Pega o pai com melhor aptidao. Pega mae com maior aptidar
 
     /*//Crossover(Pai e Mae){
       escole do melhor aptidao Pai vs Mae (pipe ponto de corte)
@@ -70,23 +65,16 @@ public class AlgoritmoGenetico {
     } */
   }
 
-  /************************************************** */
-  int vIn = 1;
-  boolean vOut = vIn!= 0;
-
-  public Individuos getEletismo(Populacao populacao) {
+  public Individuos getElitismo(Populacao populacao) {
     int indexOfMaxValue = -1;
-    boolean indexOfMaxValueBoolean;
 
     for (int i = 0; i <= populacao.getIndividuos().length; i++) {
-      if (populacao.getIndividuos()[i].getAptidao() > this.eletismo.getAptidao()) {
+      if (populacao.getIndividuos()[i].getAptidao() > this.elitismo.getAptidao()) {
         indexOfMaxValue = i;
       }
-      indexOfMaxValueBoolean = indexOfMaxValue == -1;
-      if(indexOfMaxValueBoolean) {
-        return this.eletismo;
-      }
-      else {
+      if (indexOfMaxValue == -1) {
+        return this.elitismo;
+      } else {
         return populacao.getIndividuos()[indexOfMaxValue];
       }
     }
@@ -97,14 +85,17 @@ public class AlgoritmoGenetico {
     Individuos IndividuoPercorrido = PercorreLabirinto.PercorrerLabirinto(individuos);
     double aptidao = 0.0;
     // Modelo para adpitdao;
-    if (IndividuoPercorrido.getindexNPonto() == 0)
+    if (IndividuoPercorrido.getindexNPonto() == 0) {
       aptidao = -1; // punimos aquele que não consegue sair do lugar
+    }
 
     // valorizamos aqueles que percorrer o menor caminho + em dobro as comidas
     // coletadas #Pode ser ser bom, ou pode ser ruim pois privilegia somente queem
     // anda pouco e nao faz nada#
-    aptidao = (IndividuoPercorrido.getmovimentosDoIndividuo().length - IndividuoPercorrido.getindexNPonto())
-        * (2 * IndividuoPercorrido.getComidasColetadas() * 0.1); // 0.1 pois se for 0, irá zerar todo
+    aptidao = (IndividuoPercorrido.getmovimentosDoIndividuo().length - IndividuoPercorrido
+        .getindexNPonto())
+        * (2 * IndividuoPercorrido.getComidasColetadas()
+        * 0.1); // 0.1 pois se for 0, irá zerar todo
 
     // preisamos punir ao colidir em parede ou verificar se o index do ultimo
     // movimento já ajuda
@@ -127,10 +118,12 @@ public class AlgoritmoGenetico {
     return individuoMutacao;
   }
 
-  public Individuos MutacaoParcial(Individuos individuo) { // aproveitara parte do caminho com sucesso
+  public Individuos MutacaoParcial(
+      Individuos individuo) { // aproveitara parte do caminho com sucesso
     int indexUltimaPosValida = individuo.getindexNPonto();
-    Direcoes[] caminhoOverride = individuo.getmovimentosDoIndividuo(); // aproveitamos a parte intera e sobreescrevemos
-                                                                       // o resto com movimentos aleatorios
+    Direcoes[] caminhoOverride = individuo
+        .getmovimentosDoIndividuo(); // aproveitamos a parte intera e sobreescrevemos
+    // o resto com movimentos aleatorios
     for (int i = indexUltimaPosValida + 1; i < caminhoTotalPorIndividuo; i++) {
       caminhoOverride[i] = Direcoes.generateRandomDirecao();
     }

@@ -11,13 +11,12 @@ import java.util.List;
 
 public class Labirinto {
 
+  // Singleton
+  private static Labirinto uniqueInstance;
   public List<List<Posicao>> matriz;
   // private List<Posicao> comidas;
   private int comidas;
   private Posicao inicio;
-
-  // Singleton
-  private static Labirinto uniqueInstance;
 
   private Labirinto() {
   }
@@ -30,18 +29,18 @@ public class Labirinto {
     return uniqueInstance;
   }
 
+  public static String ReadFile(String file) throws IOException {
+    String data = "";
+    data = new String(Files.readAllBytes(Paths.get(file)));
+    return data;
+  }
+
   public void Init(String file) throws IOException {
     this.matriz = new ArrayList<>();
     // this.comidas = new ArrayList<>();
     this.comidas = 0;
     String allLinesFiles = ReadFile(file);
     preencherMatriz(allLinesFiles);
-  }
-
-  public static String ReadFile(String file) throws IOException {
-    String data = "";
-    data = new String(Files.readAllBytes(Paths.get(file)));
-    return data;
   }
 
   public void preencherMatriz(String allLinesFiles) {
@@ -63,17 +62,17 @@ public class Labirinto {
             tipo = TipoConteudo.CAMINHO;
             break;
           case "C":
-            tipo = TipoConteudo.TESOURO;
+            tipo = TipoConteudo.COMIDA;
             break;
           default:
             throw new IllegalReceiveException("valor da posicao da matriz invalido.");
         }
         var posicao = new Posicao(i - 1, j, tipo);
-        if (tipo.equals(TipoConteudo.TESOURO)) {
+        if (tipo.equals(TipoConteudo.COMIDA)) {
           this.comidas++;
         }
         if (tipo.equals(TipoConteudo.INICIO)) {
-          this.inicio = new Posicao(i, j, tipo);
+          this.inicio = new Posicao(i - 1, j, tipo);
         }
         this.matriz.get(i - 1).add(posicao);
       }
@@ -95,10 +94,10 @@ public class Labirinto {
   }
 
   /**
-   * @deprecated //nao podemos verificar possiveis caminhos. O algortimo nao pode
-   *             prever caminhos com if else
    * @param posicao
    * @return
+   * @deprecated //nao podemos verificar possiveis caminhos. O algortimo nao pode prever caminhos
+   * com if else
    */
   public List<Posicao> possiveisCaminhos(Posicao posicao) {
     // System.out.println(" -> possiveis caminhos");

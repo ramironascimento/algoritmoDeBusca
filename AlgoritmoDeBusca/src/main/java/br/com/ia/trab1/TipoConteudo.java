@@ -4,5 +4,5 @@ public enum TipoConteudo {
     INICIO,
     PAREDE,
     CAMINHO,
-    TESOURO;
+    COMIDA;
 }

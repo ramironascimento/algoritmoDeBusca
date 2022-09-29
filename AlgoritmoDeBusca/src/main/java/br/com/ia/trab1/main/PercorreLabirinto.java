@@ -2,8 +2,6 @@ package br.com.ia.trab1.main;
 
 import br.com.ia.trab1.Posicao;
 import br.com.ia.trab1.TipoConteudo;
-import br.com.ia.trab1.main.Labirinto;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,19 +11,19 @@ public class PercorreLabirinto {
 
   /**
    * Recebe um individuo para percorrer.
-   * 
+   *
    * @return Individuo com suas infomacoes atualizadas
    */
 
   public static Individuos PercorrerLabirinto(Individuos individuo) {
     Labirinto labirinto = Labirinto.getInstance();
-    List<List<Posicao>> matrizLaribinrto = labirinto.getMatrizLabirinto();
+    List<List<Posicao>> matrizLabirinto = labirinto.getMatrizLabirinto();
     Posicao posicaoAtual = labirinto.getInicio();
 
     Direcoes[] movimento = individuo.getmovimentosDoIndividuo();
 
     // mais tarde podemos otimizar com i recebendo o ultimo i da
-    for (int i = 0; i < individuo.getmovimentosDoIndividuo().length; i++) {
+    for (int i = 0; i < movimento.length; i++) {
 
       // Faz o movimento.
       int linha = posicaoAtual.getLinha();
@@ -74,17 +72,24 @@ public class PercorreLabirinto {
       }
 
       // VALIDA OS MOVEVIMENTOS
-      if (linha < 0 || coluna < 0) {
-        
+      if (linha < 0 || coluna < 0 ||
+          linha >= matrizLabirinto.size() || coluna >= matrizLabirinto.size()) {
         return individuo;
-      } 
-      else {
-
-        if (matrizLaribinrto.get(linha).get(coluna).getTipo() == TipoConteudo.CAMINHO)
+      } else {
+        var xy = matrizLabirinto.get(linha).get(coluna);
+        if (TipoConteudo.CAMINHO.equals(xy.getTipo())) {
           individuo.setindexNPonto(i);
-        if (matrizLaribinrto.get(linha).get(coluna).getTipo() == TipoConteudo.TESOURO)
-          individuo.setComidasColetadas();
-
+        }
+        if (TipoConteudo.COMIDA.equals(xy.getTipo())) {
+          individuo.setComidasColetadas(xy);
+          individuo.setindexNPonto(i);
+        }
+        if (TipoConteudo.PAREDE.equals(xy.getTipo())) {
+          return individuo;
+        }
+        if(TipoConteudo.INICIO.equals(xy.getTipo())){
+          individuo.setindexNPonto(i);
+        }
       }
     }
     return individuo;
@@ -101,7 +106,7 @@ public class PercorreLabirinto {
       var possiveisPosicoes = labirinto.possiveisCaminhos(posicaoAtual);
       posicaoAtual = possiveisPosicoes.get(random.nextInt(possiveisPosicoes.size()));
       caminhoEncontrado.add(posicaoAtual);
-    } while (!posicaoAtual.getTipo().equals(TipoConteudo.TESOURO));
+    } while (!posicaoAtual.getTipo().equals(TipoConteudo.COMIDA));
     return caminhoEncontrado;
   }
 
@@ -114,7 +119,7 @@ public class PercorreLabirinto {
       var possiveisPosicoes = labirinto.possiveisCaminhos(posicaoAtual);
       posicaoAtual = possiveisPosicoes.get(random.nextInt(possiveisPosicoes.size()));
       caminhoEncontrado.add(posicaoAtual);
-      if (posicaoAtual.getTipo().equals(TipoConteudo.TESOURO)) {
+      if (posicaoAtual.getTipo().equals(TipoConteudo.COMIDA)) {
         // System.out.println("achei um tesouro: " + posicaoAtual.toString());
         Posicao finalPosicaoAtual = posicaoAtual;
         if (comidasAchadas.stream().noneMatch(p -> p.equals(finalPosicaoAtual))) {
