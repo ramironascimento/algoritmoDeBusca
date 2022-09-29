@@ -48,7 +48,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String filenameLabirinto = "D:/Documents/GitHub/algoritmoDeBusca/AlgoritmoDeBusca/labirinto1.txt";
         informacoesArquivo(filenameLabirinto);
-        Labirinto labirinto = new Labirinto(filenameLabirinto);
+        
+        Labirinto labirinto = Labirinto.getInstance();
+        labirinto.Init(filenameLabirinto);
+
         System.out.println(labirinto.matriz.get(0).get(0));
 
         

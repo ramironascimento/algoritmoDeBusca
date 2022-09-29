@@ -12,26 +12,27 @@ import java.util.List;
 public class Labirinto {
 
   public List<List<Posicao>> matriz;
-  //private List<Posicao> comidas;
+  // private List<Posicao> comidas;
   private int comidas;
-  private TipoConteudo inicio;
+  private Posicao inicio;
 
-  //Singleton
+  // Singleton
   private static Labirinto uniqueInstance;
 
-	private Labirinto() {
-	}
+  private Labirinto() {
+  }
 
-	public static synchronized Labirinto getInstance() {
-		if (uniqueInstance == null) System.out.println("SEM LABIRINTO CARREGADO");
-			
-		return uniqueInstance;
-	}
+  public static synchronized Labirinto getInstance() {
+    if (uniqueInstance == null) {
+      uniqueInstance = new Labirinto();
+    }
 
+    return uniqueInstance;
+  }
 
-  public Labirinto(String file) throws IOException {
+  public void Init(String file) throws IOException {
     this.matriz = new ArrayList<>();
-    //this.comidas = new ArrayList<>();
+    // this.comidas = new ArrayList<>();
     this.comidas = 0;
     String allLinesFiles = ReadFile(file);
     preencherMatriz(allLinesFiles);
@@ -72,32 +73,35 @@ public class Labirinto {
           this.comidas++;
         }
         if (tipo.equals(TipoConteudo.INICIO)) {
-          this.inicio = tipo;
+          this.inicio = new Posicao(i, j, tipo);
         }
         this.matriz.get(i - 1).add(posicao);
       }
-//      this.matriz
-//          .get(i - 1)
-//          .forEach(p -> System.out.print(p.getTipo().toString().substring(0, 1) + "  "));
-//      System.out.println(" ");
+      // this.matriz
+      // .get(i - 1)
+      // .forEach(p -> System.out.print(p.getTipo().toString().substring(0, 1) + "
+      // "));
+      // System.out.println(" ");
     }
 
   }
-  public List<List<Posicao>> getMatrizLabirinto(){
+
+  public List<List<Posicao>> getMatrizLabirinto() {
     return this.matriz;
   }
 
-  public int getQntComida(){
+  public int getQntComida() {
     return this.comidas;
   }
 
   /**
-   * @deprecated //nao podemos verificar possiveis caminhos. O algortimo nao pode prever caminhos com if else
+   * @deprecated //nao podemos verificar possiveis caminhos. O algortimo nao pode
+   *             prever caminhos com if else
    * @param posicao
    * @return
    */
   public List<Posicao> possiveisCaminhos(Posicao posicao) {
-    //System.out.println(" -> possiveis caminhos");
+    // System.out.println(" -> possiveis caminhos");
     var posicoesPossiveis = new ArrayList<Posicao>();
 
     int x_inicial = 0;
@@ -120,24 +124,25 @@ public class Labirinto {
     if (posicao.getColuna() < this.matriz.get(0).size() - 1) {
       y_final = posicao.getColuna() + 1;
     }
-//    System.out.print("[ x_inicial= " + x_inicial + ", x_final= " + x_final);
-//    System.out.print(", y_inicial= " + y_inicial + ", y_final= " + y_final + "]");
+    // System.out.print("[ x_inicial= " + x_inicial + ", x_final= " + x_final);
+    // System.out.print(", y_inicial= " + y_inicial + ", y_final= " + y_final +
+    // "]");
 
-    //System.out.println("    - loop");
+    // System.out.println(" - loop");
     for (int i = x_inicial; i <= x_final; i++) {
-      //System.out.println("      - i = " + i);
+      // System.out.println(" - i = " + i);
       for (int j = y_inicial; j <= y_final; j++) {
         if (!posicao.equals(i, j)) {
-          //System.out.println("        - j = " + j);
+          // System.out.println(" - j = " + j);
           var posicaoMatriz = this.matriz.get(i).get(j);
           if (!posicaoMatriz.getTipo().equals(TipoConteudo.PAREDE)) {
             posicoesPossiveis.add(posicaoMatriz);
-//            System.out.println(
-//                "        - possivel caminho encontrado, tipo = " + posicaoMatriz.getTipo());
+            // System.out.println(
+            // " - possivel caminho encontrado, tipo = " + posicaoMatriz.getTipo());
           }
-//          else {
-//            System.out.println("        - parede");
-//          }
+          // else {
+          // System.out.println(" - parede");
+          // }
         }
       }
     }
@@ -145,8 +150,7 @@ public class Labirinto {
   }
 
   public Posicao getInicio() {
-    return this.matriz.get(0).get(0);
+    return this.inicio;
   }
-
 
 }

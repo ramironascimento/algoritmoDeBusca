@@ -51,12 +51,20 @@ public class AlgoritmoGenetico {
     //serve para descobrir o melhoe
      eletismo = getEletismo(popInical);
 
-     // =>>>Individuos[] PaiEMae = Seleção() // 
+     //SELECAO
+     // =>>>Individuos[] pai = Seleção() // 
+     // =>>>Individuos[] mae = Seleção() // 
      //o metodo seleção deve randomizar dois individuos 
      //(popInicial.getIndividuos()[i.randmico])para o pai e randomizar dois para mae. 
      //Pega o pai com melhor aptidao. Pega mae com maior aptidar 
 
-    
+    /*//Crossover(Pai e Mae){
+      escole do melhor aptidao Pai vs Mae (pipe ponto de corte)
+      ex: pai1.getIndexNPONTO => [A,B,|C|,D,E]
+      ex: pai2.getIndexNPONTO => [E,|F|,G,H,I]
+      filho1 = [A,B,C,H,I]
+      filho2 = [E,F,C,D,E]
+    } */
 
 
 
