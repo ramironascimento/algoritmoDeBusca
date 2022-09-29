@@ -14,7 +14,7 @@ public class Labirinto {
   public List<List<Posicao>> matriz;
   //private List<Posicao> comidas;
   private int comidas;
-  private Posicao inicio;
+  private TipoConteudo inicio;
 
   //Singleton
   private static Labirinto uniqueInstance;
@@ -23,15 +23,13 @@ public class Labirinto {
 	}
 
 	public static synchronized Labirinto getInstance() {
-		if (uniqueInstance == null){
-      uniqueInstance = new Labirinto();
-    }
+		if (uniqueInstance == null) System.out.println("SEM LABIRINTO CARREGADO");
 			
 		return uniqueInstance;
 	}
 
 
-  public void Init(String file) throws IOException {
+  public Labirinto(String file) throws IOException {
     this.matriz = new ArrayList<>();
     //this.comidas = new ArrayList<>();
     this.comidas = 0;
@@ -74,7 +72,7 @@ public class Labirinto {
           this.comidas++;
         }
         if (tipo.equals(TipoConteudo.INICIO)) {
-          this.inicio = new Posicao(i, j, tipo);
+          this.inicio = tipo;
         }
         this.matriz.get(i - 1).add(posicao);
       }
@@ -147,7 +145,7 @@ public class Labirinto {
   }
 
   public Posicao getInicio() {
-    return this.inicio;
+    return this.matriz.get(0).get(0);
   }
 
 

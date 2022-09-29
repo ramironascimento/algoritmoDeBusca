@@ -17,12 +17,12 @@ public class Mutacao {
             int individuos = rnd.nextInt(populacao.getTamPopulacao());
             if (individuos <= 99) {
                Individuos individuoEscolhido = populacao.getIndividuos()[individuos];
-               int primeiraPos = rnd.nextInt(individuoEscolhido.getmovimentosDoIndividuo().length);
-               int proxPos = rnd.nextInt(individuoEscolhido.getmovimentosDoIndividuo().length);
+               int primeiraPos = rnd.nextInt(individuoEscolhido.getCaminhoIndividuo().length);
+               int proxPos = rnd.nextInt(individuoEscolhido.getCaminhoIndividuo().length);
                if(proxPos != primeiraPos) {
-                   aux = individuoEscolhido.getmovimentosDoIndividuo()[proxPos];
-                   individuoEscolhido.getmovimentosDoIndividuo()[primeiraPos] = individuoEscolhido.getmovimentosDoIndividuo()[proxPos];
-                   individuoEscolhido.getmovimentosDoIndividuo()[proxPos] = aux;
+                   aux = individuoEscolhido.getCaminhoIndividuo()[proxPos];
+                   individuoEscolhido.getCaminhoIndividuo()[primeiraPos] = individuoEscolhido.getCaminhoIndividuo()[proxPos];
+                   individuoEscolhido.getCaminhoIndividuo()[proxPos] = aux;
 
                    System.out.print(individuos + "resultou na mutação em " + primeiraPos + " | " + proxPos);
                }

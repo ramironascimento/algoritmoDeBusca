@@ -1,23 +1,23 @@
 package br.com.ia.trab1.main;
 
-import java.util.ArrayList;
-
-import br.com.ia.trab1.Posicao;
 
 public class Individuos {
 
-    private Direcoes[] movimentosDoIndividuo;
+    private Direcoes[] caminhoIndividuo;
     private int indexNPonto;
     private int comidasColetadas;
+<<<<<<< HEAD
     private double aptidao; // definimos aptidao sendo quanto maior o valor, melhor o individuo
     private ArrayList<Posicao> rotaDoIndividuo; // salva as posições validas passadas pelo indivíduo
+=======
+    private int aptidao; // definimos aptidao sendo quanto maior o valor, melhor o individuo
+>>>>>>> parent of 3eb7d04 (Percorrido larinto e gerando aptidao. Implementando eletismo)
 
     public Individuos(int caminhoTotalPorIndividuo) {
-            this.movimentosDoIndividuo = new Direcoes[caminhoTotalPorIndividuo];
+            this.caminhoIndividuo = new Direcoes[caminhoTotalPorIndividuo];
             this.indexNPonto = -1;
             this.aptidao = 0;
-             rotaDoIndividuo = new ArrayList<Posicao>(); 
-    }   
+    }
 
     /**
      * 
@@ -26,10 +26,9 @@ public class Individuos {
      * Ex populacaoInicial, os movimentos sao aleatorios
      */
     public Individuos(int caminhoTotalPorIndividuo, boolean novosCaminhosAleatorios) { //gera autoamticamente um individuo com os caminhos
-        this.movimentosDoIndividuo = new Direcoes[caminhoTotalPorIndividuo];
+        this.caminhoIndividuo = new Direcoes[caminhoTotalPorIndividuo];
         this.indexNPonto = -1;
         this.aptidao = 0; //aptidao em 0
-        rotaDoIndividuo = new ArrayList<Posicao>(); 
 
         if(novosCaminhosAleatorios) iniciaCaminhosAleatorios();
     }
@@ -37,9 +36,9 @@ public class Individuos {
 
     public void iniciaCaminhosAleatorios(){
 
-        for (int i = 0; i < movimentosDoIndividuo.length; i++) {
+        for (int i = 0; i < caminhoIndividuo.length; i++) {
             // gerará os caminhos com movimentos aleatorios
-            movimentosDoIndividuo[i] = Direcoes.generateRandomDirecao(); 
+            caminhoIndividuo[i] = Direcoes.generateRandomDirecao(); 
             
         }
 
@@ -51,8 +50,8 @@ public class Individuos {
     public int getComidasColetadas(){
         return this.comidasColetadas;
     }
-    public void setmovimentosDoIndividuo(Direcoes[] movimentosDoIndividuo) {
-        this.movimentosDoIndividuo = movimentosDoIndividuo;
+    public void setCaminhoIndividuo(Direcoes[] caminhoIndividuo) {
+        this.caminhoIndividuo = caminhoIndividuo;
     }
 
     public void setindexNPonto(int indexNPonto) {
@@ -73,22 +72,14 @@ public class Individuos {
         return indexNPonto;
     }
 
-    public Direcoes[] getmovimentosDoIndividuo() {
-        return movimentosDoIndividuo;
-    }
-
-    public void setRotaDoIndividuo(Posicao addDirecao){
-        this.rotaDoIndividuo.add(addDirecao);
-    }
-    
-    public ArrayList<Posicao> getRotaDoIndividuo(){
-        return this.rotaDoIndividuo;
+    public Direcoes[] getCaminhoIndividuo() {
+        return caminhoIndividuo;
     }
 
     @Override
     public String toString() {
         return "Individuos  " +
-                "movimentosDoIndividuo=\n" + movimentosDoIndividuo.toString() +
+                "caminhoIndividuo=\n" + caminhoIndividuo +
                 ", indexNPonto=\n" + indexNPonto +
                 ", aptidao=" + aptidao +
                 ' ';

@@ -9,8 +9,6 @@ import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-import lombok.Getter;
-import lombok.Setter;
 
 public class AlgoritmoGenetico {
 

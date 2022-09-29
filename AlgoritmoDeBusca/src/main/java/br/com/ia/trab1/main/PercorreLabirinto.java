@@ -19,14 +19,13 @@ public class PercorreLabirinto {
 
   public static Individuos PercorrerLabirinto(Individuos individuo) {
     Labirinto labirinto = Labirinto.getInstance();
- 
     List<List<Posicao>> matrizLaribinrto = labirinto.getMatrizLabirinto();
     Posicao posicaoAtual = labirinto.getInicio();
 
-    Direcoes[] movimento = individuo.getmovimentosDoIndividuo();
+    Direcoes[] movimento = individuo.getCaminhoIndividuo();
 
     // mais tarde podemos otimizar com i recebendo o ultimo i da
-    for (int i = 0; i < individuo.getmovimentosDoIndividuo().length; i++) {
+    for (int i = 0; i < individuo.getCaminhoIndividuo().length; i++) {
 
       // Faz o movimento.
       int linha = posicaoAtual.getLinha();
@@ -44,7 +43,6 @@ public class PercorreLabirinto {
 
         case SUL:
           posicaoAtual.setLinha(linha++);
-
           break;
 
         case NORTE:
@@ -76,26 +74,19 @@ public class PercorreLabirinto {
           break;
       }
 
-      // VALIDA OS MOVIMENTOS INVALIDOS
-      if (linha < 0 || 
-          coluna < 0 || 
-          linha > matrizLaribinrto.size() ||
-          coluna > matrizLaribinrto.get(linha).size()) {
-
+      // VALIDA OS MOVEVIMENTOS
+      if (linha < 0 || coluna < 0) {
+        
         return individuo;
       } 
       else {
-        //TRATA MOVIMENTOS VALIDOS
-        if (matrizLaribinrto.get(linha).get(coluna).getTipo() == TipoConteudo.CAMINHO)
-          individuo.setindexNPonto(i+1);
-          individuo.setRotaDoIndividuo(new Posicao(linha, coluna, TipoConteudo.CAMINHO));
-        
-          if (matrizLaribinrto.get(linha).get(coluna).getTipo() == TipoConteudo.TESOURO)
-          individuo.setComidasColetadas();//possui auto incremento
-          individuo.setindexNPonto(i+1);
-          individuo.setRotaDoIndividuo(new Posicao(linha, coluna, TipoConteudo.CAMINHO));
 
-      }//Se for parede, nada se altera/ignora
+        if (matrizLaribinrto.get(linha).get(coluna).getTipo() == TipoConteudo.CAMINHO)
+          individuo.setindexNPonto(i);
+        if (matrizLaribinrto.get(linha).get(coluna).getTipo() == TipoConteudo.TESOURO)
+          individuo.setComidasColetadas();
+
+      }
     }
     return individuo;
   }
