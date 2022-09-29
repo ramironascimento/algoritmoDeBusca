@@ -9,7 +9,7 @@ public class Individuos {
     private Direcoes[] movimentosDoIndividuo;
     private int indexNPonto;
     private int comidasColetadas;
-    private int aptidao; // definimos aptidao sendo quanto maior o valor, melhor o individuo
+    private double aptidao; // definimos aptidao sendo quanto maior o valor, melhor o individuo
     private ArrayList<Posicao> rotaDoIndividuo; // salva as posições validas passadas pelo indivíduo
 
     public Individuos(int caminhoTotalPorIndividuo) {
@@ -61,7 +61,7 @@ public class Individuos {
         }
     }
 
-    public void setAptidao(int aptidao) {
+    public void setAptidao(double aptidao) {
         this.aptidao = aptidao;
     }
 

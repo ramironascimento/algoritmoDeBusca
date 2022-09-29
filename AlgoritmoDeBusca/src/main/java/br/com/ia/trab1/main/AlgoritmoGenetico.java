@@ -5,14 +5,13 @@ import static br.com.ia.trab1.Output.*;
 import java.beans.IndexedPropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 public class AlgoritmoGenetico {
 
   // VARIAIVEIS GLOBAIS DE ALGORTIMOS GENETICOS (outras classes podem precisar)
@@ -23,7 +22,7 @@ public class AlgoritmoGenetico {
   public double taxaDeMutacaoTotal; // gera um individuo totalmente novo
   public int qntComida;
 
-  Individuos eletismo; // individuo com a melhor aptidao a cada geração
+  public Individuos eletismo; // individuo com a melhor aptidao a cada geração
 
   public AlgoritmoGenetico(int tamPopulacao, int caminhoTotalPorIndividuo, int quantidadeDeGeracoes,
       double taxaDeMutacaoParcial, double taxaDeMutacaoTotal, int qntComida) {
@@ -33,7 +32,6 @@ public class AlgoritmoGenetico {
     this.taxaDeMutacaoParcial = taxaDeMutacaoParcial;
     this.taxaDeMutacaoTotal = taxaDeMutacaoTotal;
     this.qntComida = qntComida;
-    this.eletismo.setAptidao(Double.MIN_VALUE);
 
   public void executaAlgoritmoGenetico() {
     Populacao popInical = new Populacao(tamPopulacao);
@@ -46,15 +44,27 @@ public class AlgoritmoGenetico {
         System.out.println(individuo.toString() + "||" + Aptidao(individuo));
       }
     }
-    // // pegar maior aptidao
-    
-  
-    Elistismo = Arrays.stream(popInical.getIndividuos())
-            .max(Comparator.comparingDouble(popInical.getIndividuos()::getAptidao))
-            .orElseThrow(NoSuchElementException::new);
+
+    // elistismo*/
+
   }
 
   /************************************************** */
+
+  public Individuos getElistismo(Populacao populacao) {
+    int indexOfMaxValue = -1;
+
+    for (int i = 0; i < populacao.getIndividuos().length; i++) {
+      if (populacao.getIndividuos()[i].getAptidao() > eletismo.getAptidao()) {
+        indexOfMaxValue = i;
+        //return populacao.getIndividuos()[indexOfMaxValue].getAptidao();
+      }
+    }
+    // se nenhum melhor, deolve o mesmo
+    return this.eletismo;
+
+  }
+
   public double Aptidao(Individuos individuos) {
     Individuos IndividuoPercorrido = PercorreLabirinto.PercorrerLabirinto(individuos);
     double aptidao = 0.0;
@@ -103,6 +113,6 @@ public class AlgoritmoGenetico {
     // individuoMutado.setAptidao(); PRECISAMOS DEFINIR A FUNCAO APTIDAO AINDA
 
     return individuoMutado;
-
   }
+
 }
