@@ -46,7 +46,7 @@ public class Main {
     
 
     public static void main(String[] args) throws IOException {
-        String filenameLabirinto = "D:/Documents/GitHub/algoritmoDeBusca/AlgoritmoDeBusca/labirinto1.txt";
+        String filenameLabirinto = "C:/Users/admin/Desktop/algoritmoDeBusca/AlgoritmoDeBusca/labirinto1.txt";
         informacoesArquivo(filenameLabirinto);
         
         Labirinto labirinto = Labirinto.getInstance();

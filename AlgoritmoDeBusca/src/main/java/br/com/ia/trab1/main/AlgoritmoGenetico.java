@@ -3,11 +3,7 @@ package br.com.ia.trab1.main;
 import static br.com.ia.trab1.Output.*;
 
 import java.beans.IndexedPropertyChangeEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.NoSuchElementException;
-import java.util.Random;
+import java.util.*;
 
 
 public class AlgoritmoGenetico {
@@ -30,6 +26,14 @@ public class AlgoritmoGenetico {
     this.taxaDeMutacaoParcial = taxaDeMutacaoParcial;
     this.taxaDeMutacaoTotal = taxaDeMutacaoTotal;
     this.qntComida = qntComida;
+    this.eletismo = getMinValue();
+
+  }
+
+  private Individuos getMinValue() {
+    Individuos individuos = new Individuos();
+    individuos.setAptidao(Double.MIN_VALUE);
+    return individuos;
   }
 
   public void executaAlgoritmoGenetico() {
@@ -45,7 +49,6 @@ public class AlgoritmoGenetico {
       }
 
       // elistismo*/
-   
     }
 
     //serve para descobrir o melhoe
@@ -65,32 +68,29 @@ public class AlgoritmoGenetico {
       filho1 = [A,B,C,H,I]
       filho2 = [E,F,C,D,E]
     } */
-
-
-
   }
 
   /************************************************** */
-
+  int vIn = 1;
+  boolean vOut = vIn!= 0;
 
   public Individuos getEletismo(Populacao populacao) {
     int indexOfMaxValue = -1;
+    boolean indexOfMaxValueBoolean;
 
-    for (int i = 0; i < populacao.getIndividuos().length; i++) {
-      if (populacao.getIndividuos()[i].getAptidao() > eletismo.getAptidao()) {
+    for (int i = 0; i <= populacao.getIndividuos().length; i++) {
+      if (populacao.getIndividuos()[i].getAptidao() > this.eletismo.getAptidao()) {
         indexOfMaxValue = i;
-        //return populacao.getIndividuos()[indexOfMaxValue].getAptidao();
+      }
+      indexOfMaxValueBoolean = indexOfMaxValue == -1;
+      if(indexOfMaxValueBoolean) {
+        return this.eletismo;
+      }
+      else {
+        return populacao.getIndividuos()[indexOfMaxValue];
       }
     }
-    // se nenhum melhor, deolve o mesmo
-    if(indexOfMaxValue == -1){
-      return this.eletismo;
-    }
-    else{
-      return populacao.getIndividuos()[indexOfMaxValue];
-    }  
-      
-
+    return null;
   }
 
   public double Aptidao(Individuos individuos) {
