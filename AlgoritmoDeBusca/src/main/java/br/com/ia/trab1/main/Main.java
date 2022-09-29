@@ -54,8 +54,8 @@ public class Main {
     System.out.println(labirinto.matriz.get(0).get(0));
 
     int tamPopulacao = 100;
-    int caminhoTotalPorIndividuo = 20;
-    int quantidadeDeGeracoes = 10;
+    int caminhoTotalPorIndividuo = 100;
+    int quantidadeDeGeracoes = 1000000;
     double taxaDeMutacaoParcial = 0.0; // aquela que aroveita o caminho bom
     double taxaDeMutacaoTotal = 0.1; // gera um individuo totalmente novo
     int qntComidas = labirinto.getQntComida();

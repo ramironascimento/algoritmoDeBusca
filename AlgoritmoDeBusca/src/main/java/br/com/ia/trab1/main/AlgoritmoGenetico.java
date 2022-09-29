@@ -58,16 +58,16 @@ public class AlgoritmoGenetico {
       //Identifica aptidao a partir do percurso no labirinto
       for (Individuo individuo : populacaoBase.getIndividuos()) {
 
-        System.out.println("individuo " + j++);
+        //System.out.println("individuo " + j++);
         
         individuo = PercorreLabirinto.PercorrerLabirinto(individuo);
         var aptidao = Aptidao(individuo);
         
-        System.out.println("  APTIDAO" + aptidao);
+        //System.out.println("  APTIDAO" + aptidao);
         
         individuo.setAptidao(aptidao);
 
-        System.out.println(individuo.toString() /*Aptidao(individuo)*/);      
+        //System.out.println(individuo.toString() /*Aptidao(individuo)*/);      
 
       }
 
@@ -84,16 +84,17 @@ public class AlgoritmoGenetico {
       ArrayList<Individuo> listaNovosIndividuos = new ArrayList<>(tamPopulacao);
       listaNovosIndividuos.add(elitismo);
       
-      // Preenche a populacao intermediaria com as selecoes e crossover
+      
 
       boolean executaMutacao= true;
+      //FLUXO DE SELEÇÃO, CROSSOVER E MUTAÇÃO
       while(listaNovosIndividuos.size() < tamPopulacao){
           Individuo[] paiEMae = selecao(populacaoBase);
           Individuo[] filhos = crossover(paiEMae[0], paiEMae[1]);
 
           var moduloAuxMutacao = this.quantidadeDeGeracoes*this.taxaDeMutacaoTotal;
 
-          //TODO
+          //
           if(i%moduloAuxMutacao == 0 && executaMutacao){ //executando mutacao ao passo certo
             filhos[new Random().nextInt(2)] = mutacao();
             executaMutacao =false;

@@ -25,7 +25,7 @@ public class PercorreLabirinto {
     // mais tarde podemos otimizar com i recebendo o ultimo i da
     int linha = 0;
     int coluna = 0;
-    System.out.print("  passos dados:");
+    //System.out.print("  passos dados:");
     for (int i = 0; i < movimento.length; i++) {
       // Faz o movimento.
 
@@ -74,7 +74,7 @@ public class PercorreLabirinto {
       // VALIDA OS MOVEVIMENTOS
       if (linha < 0 || coluna < 0 ||
           linha >= matrizLabirinto.size() || coluna >= matrizLabirinto.size()) {
-        System.out.println(" movimento invalido");
+       // System.out.println(" movimento invalido");
         return individuo;
       } else {
         var xy = matrizLabirinto.get(linha).get(coluna);
@@ -88,8 +88,8 @@ public class PercorreLabirinto {
           System.out.print("[" + xy.getTipo() +"]");
         }
         else if (TipoConteudo.PAREDE.equals(xy.getTipo())) {
-          System.out.println("[" + xy.getTipo() +"]");
-          System.out.println("quantidade de passos dados: " + i);
+         // System.out.println("[" + xy.getTipo() +"]");
+          //System.out.println("quantidade de passos dados: " + i);
           return individuo;
         }
         else if(TipoConteudo.INICIO.equals(xy.getTipo())){
@@ -97,7 +97,7 @@ public class PercorreLabirinto {
           individuo.setindexNPonto(i);
         }
         else{
-          System.out.println("MOVIMENTO INVALIDO");
+         // System.out.println("MOVIMENTO INVALIDO");
         }
       }
     }
