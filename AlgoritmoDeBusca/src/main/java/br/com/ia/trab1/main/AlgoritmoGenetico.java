@@ -65,7 +65,7 @@ public class AlgoritmoGenetico {
   /************************************************** */
 
 
-  public Individuos getElistismo(Populacao populacao) {
+  public Individuos getEletismo(Populacao populacao) {
     int indexOfMaxValue = -1;
 
     for (int i = 0; i < populacao.getIndividuos().length; i++) {
@@ -79,7 +79,7 @@ public class AlgoritmoGenetico {
       return this.eletismo;
     }
     else{
-      populacao.getIndividuos()[indexOfMaxValue]/
+      return populacao.getIndividuos()[indexOfMaxValue];
     }  
       
 
@@ -106,10 +106,6 @@ public class AlgoritmoGenetico {
     return aptidao;
   }
 
-  public Individuos getEletismo(Populacao  populacao) {
-
-
-  }
   public Individuos[] Crossover(Individuos father, Individuos Mother) {
 
     /** FALTA CONSTRUIR */
