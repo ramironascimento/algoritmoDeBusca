@@ -6,15 +6,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+
 public class Main {
 
+
     public static int informacoesArquivo(String file) throws IOException {
+        
         FileInputStream fileInputStream = new FileInputStream(file);
         InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         Path filePath = Paths.get(file);
         List<String> linhasArquivo = Files.readAllLines(filePath)/* .subList(0, 5) */;
         linhasArquivo.forEach(System.out::println);
+    
 
         String line;
         int wordCount = 0, characterCount = 0, paraCount = 0, whiteSpaceCount = 0, sentenceCount = 0;
@@ -48,9 +52,13 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String filenameLabirinto = "D:/Documents/GitHub/algoritmoDeBusca/AlgoritmoDeBusca/labirinto1.txt";
         informacoesArquivo(filenameLabirinto);
-        Labirinto labirinto = new Labirinto(filenameLabirinto);
-        System.out.println(labirinto.matriz.get(0).get(0));
 
+        Labirinto labirinto =  Labirinto.getInstance();
+
+        labirinto.Init(filenameLabirinto);
+
+        System.out.println("inicio " + labirinto.getInicio());
+        System.out.println("Comidas" + labirinto.getQntComida());
         
         int tamPopulacao = 10;
         int caminhoTotalPorIndividuo = 20;
@@ -67,7 +75,7 @@ public class Main {
         popInical.iniciaPopulacao(caminhoTotalPorIndividuo);
 
         for (Individuos i : popInical.getIndividuos()) {
-            for (Direcoes dir : i.getCaminhoIndividuo()) {
+            for (Direcoes dir : i.getmovimentosDoIndividuo()) {
                 System.out.print(dir + "||");
             }
             System.out.println("");
