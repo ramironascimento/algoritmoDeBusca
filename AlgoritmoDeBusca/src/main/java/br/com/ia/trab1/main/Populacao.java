@@ -1,5 +1,6 @@
 package br.com.ia.trab1.main;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Populacao { // agrupar os individuos

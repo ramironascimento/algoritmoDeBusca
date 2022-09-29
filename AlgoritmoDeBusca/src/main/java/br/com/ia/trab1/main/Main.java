@@ -37,11 +37,6 @@ public class Main {
     if (sentenceCount >= 1) {
       paraCount++;
     }
-//    System.out.println("\nContador de Palavras -->  " + wordCount);
-//    System.out.println("Número de Linhas -->  " + sentenceCount);
-//    System.out.println("Número de Caracteres -->  " + characterCount);
-//    System.out.println("Número de paragrafos -->  " + paraCount);
-//    System.out.println("Número de Espaços -->  " + whiteSpaceCount);
 
     return sentenceCount;
 
@@ -49,7 +44,7 @@ public class Main {
 
 
   public static void main(String[] args) throws IOException {
-    String filenameLabirinto = "D:/Documents/GitHub/algoritmoDeBusca/AlgoritmoDeBusca/labirinto1.txt";
+    String filenameLabirinto = "C:\\Users\\ramir\\OneDrive\\z_Documents_antigo\\PUCRS\\2022-2\\IA\\atividades avaliativas\\trabalho 1\\algoritmoDeBusca\\AlgoritmoDeBusca\\labirinto1.txt";
     informacoesArquivo(filenameLabirinto);
 
     Labirinto labirinto = Labirinto.getInstance();
@@ -57,9 +52,9 @@ public class Main {
 
     //System.out.println(labirinto.matriz.get(0).get(0));
 
-    int tamPopulacao = 10;
+    int tamPopulacao = 100;
     int caminhoTotalPorIndividuo = 20;
-    int quantidadeDeGeracoes = 100000;
+    int quantidadeDeGeracoes = 10;
     double taxaDeMutacaoParcial = 0.0; // aquela que aroveita o caminho bom
     double taxaDeMutacaoTotal = 0.1; // gera um individuo totalmente novo
     int qntComidas = labirinto.getQntComida();

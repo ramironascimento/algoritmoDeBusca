@@ -60,7 +60,9 @@ public class AlgoritmoGenetico {
 
         System.out.println("individuo " + j++);
         individuo = PercorreLabirinto.PercorrerLabirinto(individuo);
-        individuo.setAptidao(Aptidao(individuo));
+        var aptidao = Aptidao(individuo);
+        System.out.println("  APTIDAO" + aptidao);
+        individuo.setAptidao(aptidao);
 
         System.out.println(individuo.toString() /*Aptidao(individuo)*/);      
 
@@ -68,6 +70,7 @@ public class AlgoritmoGenetico {
 
       // elistismo - descobrir o melhor individuo*/
       elitismo = getElitismo(populacaoBase);
+      System.out.println("ELITISMO " + this.elitismo.toString());
 
       ArrayList<Individuo> listaNovosIndividuos = new ArrayList<>(tamPopulacao);
       listaNovosIndividuos.add(elitismo);
@@ -76,10 +79,10 @@ public class AlgoritmoGenetico {
       while(listaNovosIndividuos.size() < tamPopulacao){
           Individuo[] paiEMae = selecao(populacaoBase);
           Individuo[] filhos = crossover(paiEMae[0], paiEMae[1]);
-          
-        
+
           var moduloAuxMutacao = this.quantidadeDeGeracoes*this.taxaDeMutacaoTotal;
-          
+
+          //TODO
           if(i%moduloAuxMutacao == 0){ //executando mutacao ao passo certo
             filhos[new Random().nextInt(2)] = mutacao();
           }
@@ -90,20 +93,16 @@ public class AlgoritmoGenetico {
           listaNovosIndividuos.add(filhos[1]);
           }
       }
-      
-      populacaoIntermdiariaGeracao.setIndividuos((Individuo[])listaNovosIndividuos.toArray());
+      populacaoIntermdiariaGeracao.setIndividuos(listaNovosIndividuos.toArray(Individuo[]::new));
       populacaoIntermediaria.add (populacaoIntermdiariaGeracao);
-
       populacaoBase = populacaoIntermdiariaGeracao;
-
-            
-
     }
 
   
   }
 
   private Individuo mutacao() {
+    System.out.println("***** mutando *****");
     return new Individuo(this.caminhoTotalPorIndividuo,true); //tamanho do individuo | novos movimentos aleatorios
   }
 
@@ -169,9 +168,9 @@ public class AlgoritmoGenetico {
           }
         
       }
-      filhos[0] = new Individuo();
+      filhos[0] = new Individuo(this.caminhoTotalPorIndividuo);
       filhos[0].setMovimentosDoIndividuo(movimentosFilho0);
-      filhos[1] = new Individuo();
+      filhos[1] = new Individuo(this.caminhoTotalPorIndividuo);
       filhos[1].setMovimentosDoIndividuo(movimentosFilho1);
       
 
@@ -182,10 +181,13 @@ public class AlgoritmoGenetico {
   
   public Individuo getElitismo(Populacao populacao) {
     int indexOfMaxValue = -1;
-    double MaxAptidao = 0;
+    Individuo individuoComMaiorAptidao = new Individuo();
+    double getMaiorAbtidao = -2;
+//    double MaxAptidao = Double.MIN_VALUE;
     for (int i = 0; i < populacao.getIndividuos().length; i++) {
-      if (populacao.getIndividuos()[i].getAptidao() > MaxAptidao) {
-        indexOfMaxValue = i; 
+      if (populacao.getIndividuos()[i].getAptidao() > getMaiorAbtidao) {
+        indexOfMaxValue = i;
+        getMaiorAbtidao = populacao.getIndividuos()[i].getAptidao();
       }
     }
     if (indexOfMaxValue == -1) {
@@ -206,10 +208,8 @@ public class AlgoritmoGenetico {
     // valorizamos aqueles que percorrer o menor caminho + em dobro as comidas
     // coletadas #Pode ser ser bom, ou pode ser ruim pois privilegia somente queem
     // anda pouco e nao faz nada#
-    aptidao = (IndividuoPercorrido.getMovimentosDoIndividuo().length - IndividuoPercorrido
-        .getIndexNPonto())
-        * (2 * IndividuoPercorrido.getComidasColetadas()
-        * 0.1); // 0.1 pois se for 0, irá zerar todo
+    aptidao = (IndividuoPercorrido.getIndexNPonto()+1)
+        * ((2 * IndividuoPercorrido.getComidasColetadas()) == 0 ? 1 : (2 * IndividuoPercorrido.getComidasColetadas())); // 0.1 pois se for 0, irá zerar todo
 
     // preisamos punir ao colidir em parede ou verificar se o index do ultimo
     // movimento já ajuda
