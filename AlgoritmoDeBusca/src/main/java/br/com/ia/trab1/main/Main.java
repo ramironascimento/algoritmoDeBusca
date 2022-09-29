@@ -98,4 +98,4 @@ public class Main {
  * var min =
  * resultadosPrimeiraSelecao.stream().min(Comparator.comparing(List::size));
  * System.out.println(min.get().size());
- */
+*/

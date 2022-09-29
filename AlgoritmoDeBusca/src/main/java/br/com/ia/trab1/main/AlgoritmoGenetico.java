@@ -10,7 +10,7 @@ public class AlgoritmoGenetico {
   public double taxaDeMutacaoTotal; // gera um individuo totalmente novo
   public int qntComida;
 
-  public Individuos elitismo; // individuo com a melhor aptidao a cada geração
+  public Individuo elitismo; // individuo com a melhor aptidao a cada geração
 
   /************************************************** */
 
@@ -23,26 +23,28 @@ public class AlgoritmoGenetico {
     this.taxaDeMutacaoTotal = taxaDeMutacaoTotal;
     this.qntComida = qntComida;
     this.elitismo = getMinValue();
-
   }
 
-  private Individuos getMinValue() {
-    Individuos individuos = new Individuos();
-    individuos.setAptidao(Double.MIN_VALUE);
-    return individuos;
+  private Individuo getMinValue() {
+    Individuo individuo = new Individuo();
+    individuo.setAptidao(Double.MIN_VALUE);
+    return individuo;
   }
 
   public void executaAlgoritmoGenetico() {
 
     Populacao popInical = new Populacao(tamPopulacao);
     popInical.iniciaPopulacao(caminhoTotalPorIndividuo);
-    int n_geracoes = 10;
+    int n_geracoes = 3;
     for (int i = 0; i < n_geracoes; i++) {
-      for (Individuos individuo : popInical.getIndividuos()) {
+      System.out.println("Iniciando geracao: " + i);
+      int j = 1;
+      for (Individuo individuo : popInical.getIndividuos()) {
+        System.out.println("individuo " + j++);
         individuo = PercorreLabirinto.PercorrerLabirinto(individuo);
-        System.out.println(individuo.toString() + "||" + Aptidao(individuo));
+        System.out.println(individuo.toString() /*Aptidao(individuo)*/);
+        Individuo elitismo = Selecao.elitismo(popInical);
       }
-
       // elistismo*/
     }
 
@@ -65,7 +67,7 @@ public class AlgoritmoGenetico {
     } */
   }
 
-  public Individuos getElitismo(Populacao populacao) {
+  public Individuo getElitismo(Populacao populacao) {
     int indexOfMaxValue = -1;
 
     for (int i = 0; i <= populacao.getIndividuos().length; i++) {
@@ -81,8 +83,8 @@ public class AlgoritmoGenetico {
     return null;
   }
 
-  public double Aptidao(Individuos individuos) {
-    Individuos IndividuoPercorrido = PercorreLabirinto.PercorrerLabirinto(individuos);
+  public double Aptidao(Individuo individuo) {
+    Individuo IndividuoPercorrido = PercorreLabirinto.PercorrerLabirinto(individuo);
     double aptidao = 0.0;
     // Modelo para adpitdao;
     if (IndividuoPercorrido.getindexNPonto() == 0) {
@@ -105,21 +107,21 @@ public class AlgoritmoGenetico {
     return aptidao;
   }
 
-  public Individuos[] Crossover(Individuos father, Individuos Mother) {
+  public Individuo[] Crossover(Individuo father, Individuo Mother) {
 
     /** FALTA CONSTRUIR */
-    Individuos[] crossoverIndividuos = new Individuos[2];
+    Individuo[] crossoverIndividuos = new Individuo[2];
     return crossoverIndividuos;
 
   }
 
-  public Individuos MutacaoTotal() { // gera um individuo totalmente aleatório
-    Individuos individuoMutacao = new Individuos(caminhoTotalPorIndividuo, true);// OK
+  public Individuo MutacaoTotal() { // gera um individuo totalmente aleatório
+    Individuo individuoMutacao = new Individuo(caminhoTotalPorIndividuo, true);// OK
     return individuoMutacao;
   }
 
-  public Individuos MutacaoParcial(
-      Individuos individuo) { // aproveitara parte do caminho com sucesso
+  public Individuo MutacaoParcial(
+      Individuo individuo) { // aproveitara parte do caminho com sucesso
     int indexUltimaPosValida = individuo.getindexNPonto();
     Direcoes[] caminhoOverride = individuo
         .getmovimentosDoIndividuo(); // aproveitamos a parte intera e sobreescrevemos
@@ -128,7 +130,7 @@ public class AlgoritmoGenetico {
       caminhoOverride[i] = Direcoes.generateRandomDirecao();
     }
 
-    Individuos individuoMutado = new Individuos(caminhoTotalPorIndividuo);
+    Individuo individuoMutado = new Individuo(caminhoTotalPorIndividuo);
     individuoMutado.setmovimentosDoIndividuo(caminhoOverride);
 
     // individuoMutado.setAptidao(); PRECISAMOS DEFINIR A FUNCAO APTIDAO AINDA
