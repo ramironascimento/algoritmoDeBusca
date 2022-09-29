@@ -61,7 +61,7 @@ public class Main {
     int caminhoTotalPorIndividuo = 20;
     int quantidadeDeGeracoes = 100000;
     double taxaDeMutacaoParcial = 0.0; // aquela que aroveita o caminho bom
-    double taxaDeMutacaoTotal = 0.01; // gera um individuo totalmente novo
+    double taxaDeMutacaoTotal = 0.1; // gera um individuo totalmente novo
     int qntComidas = labirinto.getQntComida();
 
     AlgoritmoGenetico algGen = new AlgoritmoGenetico(tamPopulacao,
@@ -98,4 +98,4 @@ public class Main {
  * var min =
  * resultadosPrimeiraSelecao.stream().min(Comparator.comparing(List::size));
  * System.out.println(min.get().size());
- */
+*/

@@ -15,19 +15,19 @@ public class PercorreLabirinto {
    * @return Individuo com suas infomacoes atualizadas
    */
 
-  public static Individuos PercorrerLabirinto(Individuos individuo) {
+  public static Individuo PercorrerLabirinto(Individuo individuo) {
     Labirinto labirinto = Labirinto.getInstance();
     List<List<Posicao>> matrizLabirinto = labirinto.getMatrizLabirinto();
-    Posicao posicaoAtual = labirinto.getInicio();
+    Posicao posicaoAtual = new Posicao(0,0,TipoConteudo.INICIO);
 
-    Direcoes[] movimento = individuo.getmovimentosDoIndividuo();
+    Direcoes[] movimento = individuo.getMovimentosDoIndividuo();
 
     // mais tarde podemos otimizar com i recebendo o ultimo i da
+    int linha = 0;
+    int coluna = 0;
+    System.out.print("  passos dados:");
     for (int i = 0; i < movimento.length; i++) {
-
       // Faz o movimento.
-      int linha = posicaoAtual.getLinha();
-      int coluna = posicaoAtual.getColuna();
 
       switch (movimento[i]) {
 
@@ -74,24 +74,34 @@ public class PercorreLabirinto {
       // VALIDA OS MOVEVIMENTOS
       if (linha < 0 || coluna < 0 ||
           linha >= matrizLabirinto.size() || coluna >= matrizLabirinto.size()) {
+        System.out.println(" movimento invalido");
         return individuo;
       } else {
         var xy = matrizLabirinto.get(linha).get(coluna);
         if (TipoConteudo.CAMINHO.equals(xy.getTipo())) {
+          System.out.print("[" + xy.getTipo() +"]");
           individuo.setindexNPonto(i);
         }
-        if (TipoConteudo.COMIDA.equals(xy.getTipo())) {
+        else if (TipoConteudo.COMIDA.equals(xy.getTipo())) {
           individuo.setComidasColetadas(xy);
           individuo.setindexNPonto(i);
+          System.out.print("[" + xy.getTipo() +"]");
         }
-        if (TipoConteudo.PAREDE.equals(xy.getTipo())) {
+        else if (TipoConteudo.PAREDE.equals(xy.getTipo())) {
+          System.out.println("[" + xy.getTipo() +"]");
+          System.out.println("quantidade de passos dados: " + i);
           return individuo;
         }
-        if(TipoConteudo.INICIO.equals(xy.getTipo())){
+        else if(TipoConteudo.INICIO.equals(xy.getTipo())){
+          System.out.print("[" + xy.getTipo() +"]");
           individuo.setindexNPonto(i);
+        }
+        else{
+          System.out.println("MOVIMENTO INVALIDO");
         }
       }
     }
+    System.out.println(" ");
     return individuo;
   }
 

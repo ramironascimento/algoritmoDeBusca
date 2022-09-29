@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Individuos {
+public class Individuo {
 
   private Direcoes[] getmovimentosDoIndividuo;
   private int indexNPonto;
@@ -15,13 +15,13 @@ public class Individuos {
   private double aptidao; // definimos aptidao sendo quanto maior o valor, melhor o individuo
   private ArrayList<Posicao> rotaDoIndividuo; // salva as posições validas passadas pelo indivíduo
 
-  public Individuos(int caminhoTotalPorIndividuo) {
+  public Individuo(int caminhoTotalPorIndividuo) {
     this.getmovimentosDoIndividuo = new Direcoes[caminhoTotalPorIndividuo];
     this.indexNPonto = -1;
     this.aptidao = 0;
   }
 
-  public Individuos() {
+  public Individuo() {
   }
 
   ;
@@ -31,7 +31,7 @@ public class Individuos {
    * @param novosCaminhosAleatorios  utilizado para novos Individuos que precisam ser aleatorios: Ex
    *                                 populacaoInicial, os movimentos sao aleatorios
    */
-  public Individuos(int caminhoTotalPorIndividuo,
+  public Individuo(int caminhoTotalPorIndividuo,
       boolean novosCaminhosAleatorios) { //gera autoamticamente um individuo com os caminhos
     this.getmovimentosDoIndividuo = new Direcoes[caminhoTotalPorIndividuo];
     this.indexNPonto = -1;
@@ -66,7 +66,7 @@ public class Individuos {
     }
   }
 
-  public void setmovimentosDoIndividuo(Direcoes[] getmovimentosDoIndividuo) {
+  public void setMovimentosDoIndividuo(Direcoes[] getmovimentosDoIndividuo) {
     this.getmovimentosDoIndividuo = getmovimentosDoIndividuo;
   }
 
@@ -84,11 +84,11 @@ public class Individuos {
     this.aptidao = aptidao;
   }
 
-  public int getindexNPonto() {
+  public int getIndexNPonto() {
     return indexNPonto;
   }
 
-  public Direcoes[] getmovimentosDoIndividuo() {
+  public Direcoes[] getMovimentosDoIndividuo() {
     return getmovimentosDoIndividuo;
   }
 
