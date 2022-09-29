@@ -1,5 +1,7 @@
 package br.com.ia.trab1.main;
 
+import java.util.Random;
+
 public class AlgoritmoGenetico {
 
   // VARIAIVEIS GLOBAIS DE ALGORTIMOS GENETICOS (outras classes podem precisar)
@@ -37,24 +39,20 @@ public class AlgoritmoGenetico {
     Populacao popInical = new Populacao(tamPopulacao);
     popInical.iniciaPopulacao(caminhoTotalPorIndividuo);
     int n_geracoes = 10;
-    for (int i = 0; i < n_geracoes; i++) {
-      for (Individuos individuo : popInical.getIndividuos()) {
-        individuo = PercorreLabirinto.PercorrerLabirinto(individuo);
-        System.out.println(individuo.toString() + "||" + Aptidao(individuo));
-      }
 
-      // elistismo*/
+    for (int i = 0; i < n_geracoes; i++) {
+
+      for (Individuos individuo : popInical.getIndividuos()) {
+
+        individuo = PercorreLabirinto.PercorrerLabirinto(individuo);
+        individuo.setAptidao(Aptidao(individuo));
+      }
     }
 
     //serve para descobrir o melhoe
     elitismo = getElitismo(popInical);
 
-    //SELECAO
-    // =>>>Individuos[] pai = Seleção() //
-    // =>>>Individuos[] mae = Seleção() //
-    //o metodo seleção deve randomizar dois individuos
-    //(popInicial.getIndividuos()[i.randmico])para o pai e randomizar dois para mae.
-    //Pega o pai com melhor aptidao. Pega mae com maior aptidar
+    
 
     /*//Crossover(Pai e Mae){
       escole do melhor aptidao Pai vs Mae (pipe ponto de corte)
@@ -65,20 +63,47 @@ public class AlgoritmoGenetico {
     } */
   }
 
+  /**
+   * 
+   * @param populacao
+   * @return  pai[0] e mae[1] selecionados
+   */
+  public Individuos[] selecao(Populacao populacao){
+    Random gerador = new Random();
+    Individuos PaieMae[] = new Individuos[2];
+
+    tamPopulacao = (populacao.getIndividuos().length -1); //-1 para evitar indexOf
+    Individuos[] pai = {populacao.getIndividuos()[gerador.nextInt(tamPopulacao)],populacao.getIndividuos()[gerador.nextInt(tamPopulacao)]}; //seleciona dois individuos aleatórios para o pai
+    Individuos[] mae = {populacao.getIndividuos()[gerador.nextInt(tamPopulacao)],populacao.getIndividuos()[gerador.nextInt(tamPopulacao)]}; //seleciona dois individuos aleatórios para o mae
+
+    //seleciona o maior pai
+    if(pai[0].getAptidao() > pai[1].getAptidao()) 
+      PaieMae[0] = pai[0];
+
+  }
+
+  /**
+   * 
+   * @param pai
+   * @param mae
+   * @return Individuos filhos já selecionados se são melhor
+   */
+  public Individuos[] crossover(Individuos pai, Individuos mae){
+
+  }
   public Individuos getElitismo(Populacao populacao) {
     int indexOfMaxValue = -1;
-
-    for (int i = 0; i <= populacao.getIndividuos().length; i++) {
-      if (populacao.getIndividuos()[i].getAptidao() > this.elitismo.getAptidao()) {
-        indexOfMaxValue = i;
-      }
-      if (indexOfMaxValue == -1) {
-        return this.elitismo;
-      } else {
-        return populacao.getIndividuos()[indexOfMaxValue];
+    double MaxAptidão = 0;
+    for (int i = 0; i < populacao.getIndividuos().length; i++) {
+      if (populacao.getIndividuos()[i].getAptidao() > MaxAptidão) {
+        indexOfMaxValue = i; 
       }
     }
-    return null;
+    if (indexOfMaxValue == -1) {
+      return this.elitismo;
+    } else {
+      return populacao.getIndividuos()[indexOfMaxValue];
+    }
   }
 
   public double Aptidao(Individuos individuos) {

@@ -49,7 +49,7 @@ public class Main {
 
 
   public static void main(String[] args) throws IOException {
-    String filenameLabirinto = "C:\\Users\\ramir\\OneDrive\\z_Documents_antigo\\PUCRS\\2022-2\\IA\\atividades avaliativas\\trabalho 1\\algoritmoDeBusca\\AlgoritmoDeBusca\\labirinto1.txt";
+    String filenameLabirinto = "D:/Documents/GitHub/algoritmoDeBusca/AlgoritmoDeBusca/labirinto1.txt";
     informacoesArquivo(filenameLabirinto);
 
     Labirinto labirinto = Labirinto.getInstance();
