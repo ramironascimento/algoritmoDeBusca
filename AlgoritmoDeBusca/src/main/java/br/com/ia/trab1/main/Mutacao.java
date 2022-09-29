@@ -6,7 +6,7 @@ public class Mutacao {
 
 
     ////////////////////
-    /* ACHO QUE PODEMOS INCLUIR MUTACOES NA CLASSE DE ALGORITMO GENETICO PARA CONCENTRAR AS ACOES */
+    //CRIADO NO ALGORITMO GENETICO
     ///////////////////
 
 

@@ -58,10 +58,13 @@ public class AlgoritmoGenetico {
       //Identifica aptidao a partir do percurso no labirinto
       for (Individuo individuo : populacaoBase.getIndividuos()) {
 
-        System.out.println("individuo " + j++);
+        //System.out.println("individuo " + j++);
+        
         individuo = PercorreLabirinto.PercorrerLabirinto(individuo);
         var aptidao = Aptidao(individuo);
-        System.out.println("  APTIDAO" + aptidao);
+        
+        //System.out.println("  APTIDAO" + aptidao);
+        
         individuo.setAptidao(aptidao);
 
         System.out.println(individuo.toString() /*Aptidao(individuo)*/);      
@@ -71,11 +74,19 @@ public class AlgoritmoGenetico {
       // elistismo - descobrir o melhor individuo*/
       elitismo = getElitismo(populacaoBase);
       System.out.println("ELITISMO " + this.elitismo.toString());
+      if(elitismo.getComidasColetadas()==qntComida)
+        {
+          System.out.println("SOLUCAÇÃO ENCONTRADA");
+          System.exit(0);
+
+        }
 
       ArrayList<Individuo> listaNovosIndividuos = new ArrayList<>(tamPopulacao);
       listaNovosIndividuos.add(elitismo);
       
       // Preenche a populacao intermediaria com as selecoes e crossover
+
+      boolean executaMutacao= true;
       while(listaNovosIndividuos.size() < tamPopulacao){
           Individuo[] paiEMae = selecao(populacaoBase);
           Individuo[] filhos = crossover(paiEMae[0], paiEMae[1]);
@@ -83,8 +94,9 @@ public class AlgoritmoGenetico {
           var moduloAuxMutacao = this.quantidadeDeGeracoes*this.taxaDeMutacaoTotal;
 
           //TODO
-          if(i%moduloAuxMutacao == 0){ //executando mutacao ao passo certo
+          if(i%moduloAuxMutacao == 0 && executaMutacao){ //executando mutacao ao passo certo
             filhos[new Random().nextInt(2)] = mutacao();
+            executaMutacao =false;
           }
           //mutacao após filhos gerados
           
@@ -209,7 +221,7 @@ public class AlgoritmoGenetico {
     // coletadas #Pode ser ser bom, ou pode ser ruim pois privilegia somente queem
     // anda pouco e nao faz nada#
     aptidao = (IndividuoPercorrido.getIndexNPonto()+1)
-        * ((2 * IndividuoPercorrido.getComidasColetadas()) == 0 ? 1 : (2 * IndividuoPercorrido.getComidasColetadas())); // 0.1 pois se for 0, irá zerar todo
+        * ((2 * IndividuoPercorrido.getComidasColetadas()) == 0 ? 1 : (2 * IndividuoPercorrido.getComidasColetadas()));
 
     // preisamos punir ao colidir em parede ou verificar se o index do ultimo
     // movimento já ajuda
