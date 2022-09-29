@@ -58,12 +58,12 @@ public class AlgoritmoGenetico {
       //Identifica aptidao a partir do percurso no labirinto
       for (Individuo individuo : populacaoBase.getIndividuos()) {
 
-        //System.out.println("individuo " + j++);
+        System.out.println("individuo " + j++);
         
         individuo = PercorreLabirinto.PercorrerLabirinto(individuo);
         var aptidao = Aptidao(individuo);
         
-        //System.out.println("  APTIDAO" + aptidao);
+        System.out.println("  APTIDAO" + aptidao);
         
         individuo.setAptidao(aptidao);
 
