@@ -45,7 +45,7 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
     //String filenameLabirinto = "C:\\Users\\ramir\\OneDrive\\z_Documents_antigo\\PUCRS\\2022-2\\IA\\atividades avaliativas\\trabalho 1\\algoritmoDeBusca\\AlgoritmoDeBusca\\labirinto1.txt";
-    String filenameLabirinto = "D:/Documents/GitHub/algoritmoDeBusca/AlgoritmoDeBusca/labirinto1.txt";
+    String filenameLabirinto = "D:/Documents/GitHub/algoritmoDeBusca/AlgoritmoDeBusca/labirinto4.txt"; //labirinto1
     informacoesArquivo(filenameLabirinto);
 
     Labirinto labirinto = Labirinto.getInstance();
@@ -53,11 +53,11 @@ public class Main {
 
     System.out.println(labirinto.matriz.get(0).get(0));
 
-    int tamPopulacao = 100;
+    int tamPopulacao = 200;
     int caminhoTotalPorIndividuo = 100;
-    int quantidadeDeGeracoes = 1000000;
-    double taxaDeMutacaoParcial = 0.0; // aquela que aroveita o caminho bom
-    double taxaDeMutacaoTotal = 0.1; // gera um individuo totalmente novo
+    int quantidadeDeGeracoes = 500;
+    double taxaDeMutacaoParcial = 0.2; // aquela que aroveita o caminho bom
+    double taxaDeMutacaoTotal = 0.25; // gera um individuo totalmente novo
     int qntComidas = labirinto.getQntComida();
 
     AlgoritmoGenetico algGen = new AlgoritmoGenetico(tamPopulacao,

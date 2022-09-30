@@ -97,6 +97,6 @@ public class Individuo {
     return "Individuos: " + "movimentacao = " + Arrays.stream(getmovimentosDoIndividuo).map(
         Direcoes::toString).collect(Collectors.joining()) +
         ",\n indexNPonto= " + indexNPonto +
-        ",\n aptidao=" + aptidao + "\n";
+        ",\n aptidao=" + aptidao + "\n" + "\n Comidas = " + this.comidasColetadas.size();
   }
 }

@@ -58,7 +58,7 @@ public class AlgoritmoGenetico {
       //Identifica aptidao a partir do percurso no labirinto
       for (Individuo individuo : populacaoBase.getIndividuos()) {
 
-        //System.out.println("individuo " + j++);
+      ///System.out.println("individuo " + j++);
         
         individuo = PercorreLabirinto.PercorrerLabirinto(individuo);
         var aptidao = Aptidao(individuo);
@@ -70,12 +70,16 @@ public class AlgoritmoGenetico {
         //System.out.println(individuo.toString() /*Aptidao(individuo)*/);      
 
       }
-
+      
       // elistismo - descobrir o melhor individuo*/
       elitismo = getElitismo(populacaoBase);
-      System.out.println("ELITISMO " + this.elitismo.toString());
+
+      //System.out.println("ELITISMO " + this.elitismo.toString() + "Posicao" + this.elitismo.getIndexNPonto());
+      System.out.println("Posicao" + this.elitismo.getIndexNPonto());
+      
       if(elitismo.getComidasColetadas()==qntComida)
         {
+          System.out.println("ELITISMO " + this.elitismo.toString());
           System.out.println("SOLUCAÇÃO ENCONTRADA");
           System.exit(0);
 
@@ -111,7 +115,7 @@ public class AlgoritmoGenetico {
       populacaoBase = populacaoIntermdiariaGeracao;
     }
 
-  
+    System.out.println("ELITISMO " + this.elitismo.toString());
   }
 
   private Individuo mutacao() {
@@ -221,8 +225,9 @@ public class AlgoritmoGenetico {
     // valorizamos aqueles que percorrer o menor caminho + em dobro as comidas
     // coletadas #Pode ser ser bom, ou pode ser ruim pois privilegia somente queem
     // anda pouco e nao faz nada#
-    aptidao = (IndividuoPercorrido.getIndexNPonto()+1)
-        * ((2 * IndividuoPercorrido.getComidasColetadas()) == 0 ? 1 : (2 * IndividuoPercorrido.getComidasColetadas()));
+    //aptidao = (IndividuoPercorrido.getIndexNPonto()+1)+ ((50 + IndividuoPercorrido.getComidasColetadas()) == 0 ? 1 : (50 + IndividuoPercorrido.getComidasColetadas()));
+
+    aptidao = (IndividuoPercorrido.getIndexNPonto()+1) + (IndividuoPercorrido.getComidasColetadas()*50);
 
     // preisamos punir ao colidir em parede ou verificar se o index do ultimo
     // movimento já ajuda

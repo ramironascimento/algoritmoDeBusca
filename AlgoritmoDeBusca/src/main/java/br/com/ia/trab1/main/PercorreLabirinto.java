@@ -79,13 +79,13 @@ public class PercorreLabirinto {
       } else {
         var xy = matrizLabirinto.get(linha).get(coluna);
         if (TipoConteudo.CAMINHO.equals(xy.getTipo())) {
-          System.out.print("[" + xy.getTipo() +"]");
+        //  System.out.print("[" + xy.getTipo() +"]");
           individuo.setindexNPonto(i);
         }
         else if (TipoConteudo.COMIDA.equals(xy.getTipo())) {
           individuo.setComidasColetadas(xy);
           individuo.setindexNPonto(i);
-          System.out.print("[" + xy.getTipo() +"]");
+          //System.out.print("[" + xy.getTipo() +"]");
         }
         else if (TipoConteudo.PAREDE.equals(xy.getTipo())) {
          // System.out.println("[" + xy.getTipo() +"]");
@@ -93,7 +93,7 @@ public class PercorreLabirinto {
           return individuo;
         }
         else if(TipoConteudo.INICIO.equals(xy.getTipo())){
-          System.out.print("[" + xy.getTipo() +"]");
+          //System.out.print("[" + xy.getTipo() +"]");
           individuo.setindexNPonto(i);
         }
         else{
